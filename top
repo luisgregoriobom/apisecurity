@@ -1,0 +1,44 @@
+[1mdiff --git a/src/main/java/br/com/develfoodspringweb/develfoodspringweb/configuration/InitialConfig.java b/src/main/java/br/com/develfoodspringweb/develfoodspringweb/configuration/InitialConfig.java[m
+[1mindex 5e81246..f1056fb 100644[m
+[1m--- a/src/main/java/br/com/develfoodspringweb/develfoodspringweb/configuration/InitialConfig.java[m
+[1m+++ b/src/main/java/br/com/develfoodspringweb/develfoodspringweb/configuration/InitialConfig.java[m
+[36m@@ -13,7 +13,7 @@[m [mpublic class InitialConfig {[m
+ [m
+     public void configurar(){[m
+         User user = new User();[m
+[31m-        user.setName("testeName");[m
+[32m+[m[32m        user.setName("testName");[m
+         user.setPhone("333");[m
+         userRepository.save(user);[m
+ [m
+[1mdiff --git a/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/UserController.java b/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/UserController.java[m
+[1mindex ed9da23..c509361 100644[m
+[1m--- a/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/UserController.java[m
+[1m+++ b/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/UserController.java[m
+[36m@@ -23,10 +23,10 @@[m [mpublic class UserController {[m
+ [m
+     @GetMapping[m
+     public UserDto getUserByName(String nameUser){[m
+[31m-        if(nameUser == null){[m
+[31m-            return null;[m
+[31m-        }[m
+[31m-        User user = userRepository.findByName("testeName");[m
+[32m+[m[32m//        if(nameUser == null){[m
+[32m+[m[32m//            return null;[m
+[32m+[m[32m//        }[m
+[32m+[m[32m        User user = userRepository.findByName("testName");[m
+         return UserDto.convertToDto(user);[m
+     }[m
+ [m
+[1mdiff --git a/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/dto/RestaurantDto.java b/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/dto/RestaurantDto.java[m
+[1mindex 06901f0..3e5c4bb 100644[m
+[1m--- a/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/dto/RestaurantDto.java[m
+[1m+++ b/src/main/java/br/com/develfoodspringweb/develfoodspringweb/controller/dto/RestaurantDto.java[m
+[36m@@ -38,4 +38,7 @@[m [mpublic class RestaurantDto {[m
+     public Plate getPlate() {[m
+         return plate;[m
+     }[m
+[32m+[m
+[32m+[m
+[32m+[m
+ }[m

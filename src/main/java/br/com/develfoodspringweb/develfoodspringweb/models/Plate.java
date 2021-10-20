@@ -1,10 +1,15 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "plates")
+@Table(name = "plate")
+@Getter @Setter
 public class Plate {
 
     @Id
@@ -12,54 +17,15 @@ public class Plate {
     private Long id;
     private String name;
     private String description;
-    private int price;
+    private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private PlateCategory category;
 
-    public Plate(String name, String description, int price, PlateCategory category) {
+    public Plate(String name, String description, BigDecimal price, PlateCategory category) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Enum getCategory() {
-        return category;
-    }
-
-    public void setCategory(PlateCategory category) {
-        this.category = category;
-    }
 }
