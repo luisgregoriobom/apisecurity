@@ -16,21 +16,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UsuarioController {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping
-    public List<UserDto> listUser(String nameUser){
+    public UserDto getUserByName(String nameUser){
         if(nameUser == null){
-            List<User> user = userRepository.findAll();
-            return UserDto.convertToDto(user);
-        } else {
-            List<User> user = userRepository.findByName("testeName");
-            return UserDto.convertToDto(user);
+            return null;
         }
-
+        User user = userRepository.findByName("testeName");
+        return UserDto.convertToDto(user);
     }
 
     @PostMapping

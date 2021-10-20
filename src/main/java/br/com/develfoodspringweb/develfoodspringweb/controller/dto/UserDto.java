@@ -27,13 +27,14 @@ public class UserDto {
     }
 
 //    Método de conversão de Usuario para UsuarioDto sem retornar em Lista
-//    public static UserDto convertToDto(User user){
-//        return new UserDto(user);
-//    }
-//    Conversão User pra UserDto para uma lista
-    public static List<UserDto> convertToDto(List<User> users) {
-        return users.stream().map(UserDto::new).collect(Collectors.toList());
+    public static UserDto convertToDto(User user){
+        return new UserDto(user);
     }
+
+//    Conversão User pra UserDto em LISTA
+//    public static List<UserDto> convertToDto(List<User> users) {
+//        return users.stream().map(UserDto::new).collect(Collectors.toList());
+//    }
 
     public Long getId() {
         return id;
