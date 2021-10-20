@@ -1,42 +1,15 @@
-package br.com.develfoodspringweb.develfoodspringweb.models;
+package br.com.develfoodspringweb.develfoodspringweb.controller.form;
 
-import javax.persistence.*;
+import br.com.develfoodspringweb.develfoodspringweb.models.User;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class UserForm {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
     private String login;
-    private String password; //!!!!!
+    private String password;
     private String adress;
     private String email;
     private String phone;
-    @ManyToOne
-    private UserRequest userRequest;
-
-    public User() {
-    }
-
-    public User(String name, String login, String password, String adress, String email, String phone) {
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.adress = adress;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -86,11 +59,7 @@ public class User {
         this.phone = phone;
     }
 
-    public UserRequest getUserRequest() {
-        return userRequest;
-    }
-
-    public void setUserRequest(UserRequest userRequest) {
-        this.userRequest = userRequest;
+    public User convertToUser() {
+        return new User(name, login, password, adress, email, phone);
     }
 }

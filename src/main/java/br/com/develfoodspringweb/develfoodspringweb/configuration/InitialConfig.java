@@ -13,12 +13,9 @@ public class InitialConfig {
 
     public void configurar(){
         User user = new User();
-        user.setName("hm1");
-        user.setEmail("teste");
-        user.setPassword("hm23");
+        user.setName("testeName");
+        user.setPhone("333");
         userRepository.save(user);
-
-
 
     }
 

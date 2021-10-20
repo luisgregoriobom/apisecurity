@@ -12,10 +12,30 @@ public class RestaurantDto {
     private Plate plate;
 
     public RestaurantDto(Restaurant restaurant) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.plate = plate;
+        this.id = restaurant.getId();
+        this.name = restaurant.getName();
+        this.email = restaurant.getEmail();
+        this.phone = restaurant.getPhone();
+        this.plate = restaurant.getPlates();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Plate getPlate() {
+        return plate;
     }
 }
