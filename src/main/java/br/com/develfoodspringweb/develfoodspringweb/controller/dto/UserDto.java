@@ -2,10 +2,13 @@ package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter @Setter
 public class UserDto {
 
     private Long id;
@@ -35,27 +38,4 @@ public class UserDto {
 //        return users.stream().map(UserDto::new).collect(Collectors.toList());
 //    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-//    public UserRequest getUserRequest() {
-//        return userRequest;
-//    }
 }
