@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.persistence.Column;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
@@ -22,16 +24,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping
-    public UserDto getUserByName(String nameUser){
-        if(nameUser == null){
-            return null;
-        }
-        User user = userRepository.findByName("testeName");
+    public UserDto getUserByName(@RequestParam String nameUser){
+//        if(nameUser == null){
+//            return null;
+//        }
+        User user = userRepository.findByName(nameUser);
         return UserDto.convertToDto(user);
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> register(@RequestBody UserForm userForm, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder){
        User user = userForm.convertToUser();
        userRepository.save(user);
 

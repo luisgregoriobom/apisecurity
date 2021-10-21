@@ -13,7 +13,7 @@ public class InitialConfig {
 
     public void configurar(){
         User user = new User();
-        user.setName("testeName");
+        user.setName("testName");
         user.setPhone("333");
         userRepository.save(user);
 

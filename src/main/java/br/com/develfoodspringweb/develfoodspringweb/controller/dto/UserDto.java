@@ -22,7 +22,6 @@ public class UserDto {
         this.adress = user.getAdress();
         this.email = user.getEmail();
         this.phone = user.getPhone();
-        this.userRequest = user.getUserRequest();
 
     }
 
@@ -56,7 +55,7 @@ public class UserDto {
         return phone;
     }
 
-    public UserRequest getUserRequest() {
-        return userRequest;
-    }
+//    public UserRequest getUserRequest() {
+//        return userRequest;
+//    }
 }
