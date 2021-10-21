@@ -7,9 +7,9 @@ import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -26,11 +26,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+
     @GetMapping
     public Page<UserDto> lista(@RequestParam(required = false) String userName,
-                               @RequestParam int page, @RequestParam int amount, @RequestParam String ordination) {
-        Pageable pageable = PageRequest.of(page, amount, Sort.Direction.DESC, ordination);
-
+                               @PageableDefault(sort = "id",
+                                       direction = Sort.Direction.DESC,
+                                       page = 0,
+                                       size = 10) Pageable pageable) {
         if (userName == null) {
             Page<User> users = userRepository.findAll(pageable);
             return UserDto.converter(users);
@@ -53,7 +55,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> details(@PathVariable("id") Long id) {
         Optional<User> user = userRepository.findById(id);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             return ResponseEntity.ok(new UserDto(user.get()));
         }
         return ResponseEntity.notFound().build();
@@ -63,7 +65,7 @@ public class UserController {
     @Transactional
     public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormUpdate form) {
         Optional<User> optional = userRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             User user = form.update(id, userRepository);
             return ResponseEntity.ok(new UserDto(user));
         }
@@ -74,7 +76,7 @@ public class UserController {
     @Transactional
     public ResponseEntity<?> remove(@PathVariable Long id) {
         Optional<User> optional = userRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             userRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }
