@@ -1,21 +1,38 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String login;
-    private String password;
     private String email;
+    private String password;
     private String phone;
     private String address;
     private LocalDateTime creationDate = LocalDateTime.now();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Profile> profile = new ArrayList<>();
 
     public User() {
     }
@@ -28,59 +45,39 @@ public class User {
         this.address = address;
     }
 
-    public Long getId() {
-        return id;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.profile;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getPassword(){
+        return this.password;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getLogin() {
-        return login;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
