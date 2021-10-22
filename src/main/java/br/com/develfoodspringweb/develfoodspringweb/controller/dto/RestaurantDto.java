@@ -19,12 +19,10 @@ public class RestaurantDto {
         this.name = restaurant.getName();
         this.email = restaurant.getEmail();
         this.phone = restaurant.getPhone();
-//        this.plate = restaurant.getPlates();
     }
 
-    //Método para converter Restaurant em RestaurantDto
-//    public static RestaurantDto convertToDto(Restaurant restaurant);
-
-
-
+    //Conversão de Restaurant para RestaurantDto
+    public static RestaurantDto convertToDto(Restaurant restaurant){
+        return new RestaurantDto(restaurant);
+    }
 }

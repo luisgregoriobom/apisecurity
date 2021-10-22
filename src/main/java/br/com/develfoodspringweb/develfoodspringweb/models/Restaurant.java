@@ -21,6 +21,9 @@ public class Restaurant {
     @ManyToOne
     private Plate plate;
 
+    public Restaurant(){}
+
+
     public Restaurant(String name, String login, String password, String email, String phone) {
         this.name = name;
         this.login = login;

@@ -1,12 +1,7 @@
 package br.com.develfoodspringweb.develfoodspringweb.repository;
 
-import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-
 import java.util.Optional;
 
 

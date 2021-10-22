@@ -30,18 +30,23 @@ public class UserController {
 
         Optional<User> opt = userRepository.findByName(nameUser);
         if (!opt.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "name not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "User name not found");
         }
          return UserDto.convertToDto(opt.get());
 
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
+                                            UriComponentsBuilder uriBuilder){
        User user = userForm.convertToUser();
        userRepository.save(user);
 
-        URI uri = uriBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri();
+        URI uri = uriBuilder.path("/user/{id}").
+                buildAndExpand(user.getId()).
+                toUri();
+
        return ResponseEntity.created(uri).body(new UserDto(user));
     }
 
