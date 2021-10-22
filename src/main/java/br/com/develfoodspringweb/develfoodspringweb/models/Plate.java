@@ -21,11 +21,11 @@ public class Plate {
     @Enumerated(EnumType.STRING)
     private PlateCategory category;
 
-    public Plate(String name, String description, BigDecimal price, PlateCategory category) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.category = category;
+    public Plate() {
     }
 
+
+    public Plate(String name, String description) {
+
+    }
 }

@@ -1,11 +1,16 @@
 package br.com.develfoodspringweb.develfoodspringweb.configuration;
 
+import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
+import br.com.develfoodspringweb.develfoodspringweb.models.PlateCategory;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
+import br.com.develfoodspringweb.develfoodspringweb.repository.PlateRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 @Component
 public class InitialConfig {
@@ -14,12 +19,21 @@ public class InitialConfig {
     private UserRepository userRepository;
     @Autowired
     private RestaurantRepository restaurantRepository;
+    @Autowired
+    private PlateRepository plateRepository;
 
     public void configurar(){
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName("testName");
-        restaurant.setPhone("333");
-        restaurantRepository.save(restaurant);
+        Plate plate = new Plate();
+        plate.setCategory(PlateCategory.SWEET);
+        plate.setName("Bolinho de cenoura");
+        plate.setDescription("Bolito de cenoura com cobertura de chocolate em cima hmmmmm que delicia meu deus como eu queria comer agora");
+        plate.setPrice(new BigDecimal(23.05));
+        plateRepository.save(plate);
+
+//        Restaurant restaurant = new Restaurant();
+//        restaurant.setName("testName");
+//        restaurant.setPhone("333");
+//        restaurantRepository.save(restaurant);
 
 //        User user = new User();
 //        user.setName("testeName1");
