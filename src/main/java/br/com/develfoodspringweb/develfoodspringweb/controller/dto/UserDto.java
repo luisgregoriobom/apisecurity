@@ -5,8 +5,7 @@ import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Getter @Setter
 public class UserDto {
