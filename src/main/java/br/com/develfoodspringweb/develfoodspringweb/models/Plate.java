@@ -26,6 +26,7 @@ public class Plate {
 
 
     public Plate(String name, String description) {
-
+        this.name = name;
+        this.description = description;
     }
 }

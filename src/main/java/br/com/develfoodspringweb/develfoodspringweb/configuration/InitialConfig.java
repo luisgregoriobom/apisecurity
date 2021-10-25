@@ -23,17 +23,17 @@ public class InitialConfig {
     private PlateRepository plateRepository;
 
     public void configurar(){
-        Plate plate = new Plate();
-        plate.setCategory(PlateCategory.SWEET);
-        plate.setName("Bolinho de cenoura");
-        plate.setDescription("Bolito de cenoura com cobertura de chocolate em cima hmmmmm que delicia meu deus como eu queria comer agora");
-        plate.setPrice(new BigDecimal(23.05));
-        plateRepository.save(plate);
+//        Plate plate = new Plate();
+//        plate.setCategory(PlateCategory.SWEET);
+//        plate.setName("Bolinho de cenoura");
+//        plate.setDescription("Bolito de cenoura com chocolate");
+//        plate.setPrice(new BigDecimal(23.05));
+//        plateRepository.save(plate);
 
-//        Restaurant restaurant = new Restaurant();
-//        restaurant.setName("testName");
-//        restaurant.setPhone("333");
-//        restaurantRepository.save(restaurant);
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName("testName");
+        restaurant.setPhone("333");
+        restaurantRepository.save(restaurant);
 
 //        User user = new User();
 //        user.setName("testeName1");
