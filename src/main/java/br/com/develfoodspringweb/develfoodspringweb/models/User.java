@@ -1,20 +1,18 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -34,17 +32,17 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Profile> profile = new ArrayList<>();
 
-    public User() {
+    public User(@NotEmpty @Length(min = 5) String name, @NotEmpty @Length(min = 5) String email, @NotEmpty @Length(min = 5) String phone, @NotEmpty @Length(min = 5) String address) {
     }
 
-    public User(String name, String password, String email, String phone) {
+    public User(String name, String password, String email, String phone, String address) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.address = address;
-    }
 
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

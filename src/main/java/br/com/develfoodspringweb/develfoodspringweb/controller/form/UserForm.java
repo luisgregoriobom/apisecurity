@@ -58,7 +58,7 @@ public class UserForm {
         this.address = address;
     }
 
-    public User conveter(UserRepository userRepository) {
+    public User converter(UserRepository userRepository) {
     return new User(name, email, phone, address);
     }
 }

@@ -45,7 +45,7 @@ public class UserController {
     @PostMapping
     @Transactional
     public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm form, UriComponentsBuilder uriBuilder) {
-        User user = form.conveter(userRepository);
+        User user = form.converter(userRepository);
         userRepository.save(user);
 
         URI uri = uriBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri();
