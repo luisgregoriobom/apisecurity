@@ -32,10 +32,6 @@ public class Restaurant {
         this.phone = phone;
     }
 
-    public Long getId() {
-        return id;
-    }
-
 }
 
 

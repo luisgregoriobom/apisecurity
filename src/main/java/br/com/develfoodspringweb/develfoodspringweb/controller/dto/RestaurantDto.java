@@ -12,13 +12,15 @@ public class RestaurantDto {
     private String name;
     private String email;
     private String phone;
-    private Plate plate;
+    private String login;
 
     public RestaurantDto(Restaurant restaurant) {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
         this.email = restaurant.getEmail();
         this.phone = restaurant.getPhone();
+        this.login = restaurant.getLogin();
+
     }
 
     //Conversão de Restaurant para RestaurantDto
