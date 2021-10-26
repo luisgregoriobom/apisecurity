@@ -1,10 +1,12 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "restaurants")
-@Getter @Setter
+@Data
 public class Restaurant {
 
     @Id
@@ -29,9 +31,6 @@ public class Restaurant {
         this.phone = phone;
     }
 
-    public Long getId() {
-        return id;
-    }
 
 }
 

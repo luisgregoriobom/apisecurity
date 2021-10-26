@@ -2,7 +2,6 @@ package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
 
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
-import br.com.develfoodspringweb.develfoodspringweb.models.PlateCategory;
 import lombok.Getter;
 import lombok.Setter;
 
