@@ -1,8 +1,5 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
@@ -30,6 +27,10 @@ public class Restaurant {
         this.password = password;
         this.email = email;
         this.phone = phone;
+    }
+
+    public Long getId() {
+        return id;
     }
 
 }

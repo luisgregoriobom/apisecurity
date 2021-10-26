@@ -1,40 +1,49 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
-import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.domain.Page;
 
-import java.util.Optional;
-
-@Getter @Setter
 public class UserDto {
 
     private Long id;
     private String name;
-    private String adress;
     private String email;
     private String phone;
-    private UserRequest userRequest;
+    private String address;
 
-
-    public UserDto(User user){
+    public UserDto(User user) {
         this.id = user.getId();
         this.name = user.getName();
-        this.adress = user.getAdress();
         this.email = user.getEmail();
         this.phone = user.getPhone();
-
+        this.address = user.getAddress();
     }
 
-//    Método de conversão de Usuario para UsuarioDto sem retornar em Lista
-    public static UserDto convertToDto(User user){
-        return new UserDto(user);
+    public UserDto() {
+        super();
     }
 
-//    Conversão User pra UserDto em LISTA
-//    public static List<UserDto> convertToDto(List<User> users) {
-//        return users.stream().map(UserDto::new).collect(Collectors.toList());
-//    }
+    public Long getId() {
+        return id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public static Page<UserDto> converter(Page<User> users) {
+        return users.map(UserDto::new);
+    }
 }

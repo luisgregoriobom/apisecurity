@@ -2,15 +2,16 @@ package br.com.develfoodspringweb.develfoodspringweb;
 
 import br.com.develfoodspringweb.develfoodspringweb.configuration.InitialConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class DevelfoodSpringwebApplication implements CommandLineRunner{
+@EnableSpringDataWebSupport
+public class DevelfoodSpringwebApplication {
 
 	@Autowired
 	private InitialConfig initialConfig;
@@ -20,9 +21,10 @@ public class DevelfoodSpringwebApplication implements CommandLineRunner{
 
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		initialConfig.configurar();
-
+	@Bean
+	public PasswordEncoder getPasswordEncoder() {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
 	}
+
 }
