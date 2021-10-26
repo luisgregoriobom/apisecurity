@@ -1,23 +1,39 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "request")
-@Getter @Setter
+@Table(name = "user_request")
 public class UserRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private StatusRequest status = StatusRequest.EMPTY;
-    private LocalDateTime dateRequest;
-    @ManyToOne
-    private Plate plate;
+    private Enum status;
+    private LocalDateTime date;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Enum getStatus() {
+        return status;
+    }
+
+    public void setStatus(Enum status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 }

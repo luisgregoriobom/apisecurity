@@ -5,33 +5,34 @@ import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class UserForm {
+public class UserFormUpdate {
 
-    @NotEmpty
-    @NotNull
-    @Length(min = 5)
-    private String name;
-    @NotNull
-    @NotEmpty
-    @Length(min = 5)
-    private String password;
-    @NotNull
-    @NotEmpty
-    @Length(min = 5)
-    private String email;
+
     @NotNull
     @NotEmpty
     @Length(min = 5)
     private String phone;
+
     @NotNull
     @NotEmpty
     @Length(min = 5)
     private String address;
 
-    public User converter(UserRepository userRepository) {
-    return new User(name, password, email, phone, address);
+    @NotNull
+    @NotEmpty
+    @Length(min = 5)
+    private String password;
+
+    public User update(Long id, UserRepository userRepository) {
+        User user = userRepository.getOne(id);
+        user.setPhone(this.phone);
+        user.setAddress(this.address);
+        user.setPassword(this.password);
+        return user;
     }
+
 }

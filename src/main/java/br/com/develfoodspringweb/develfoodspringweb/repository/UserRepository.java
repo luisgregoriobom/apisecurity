@@ -1,15 +1,20 @@
 package br.com.develfoodspringweb.develfoodspringweb.repository;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-public interface UserRepository extends JpaRepository<User, Long>{
-    //fazendo a query pela linguagem do springdata 'findByPedidoPreco' de um atributo de uma classe relacionada
-    //nesse caso, a classe relacionada à Usuario é a Pedido e o atributo é preco (que vem da classe Pedido)
-//    User findByName(String nameUser); NÃO UTILIZADO porque retorna retorna NullPointerException para parametro que não encontrado no banco
+    Page<User> findByName(String userName, Pageable pageable);
 
-    Optional<User> findByName(String nameUser);
+    Optional<User> findByEmail(String email);
+
+
 
 }
