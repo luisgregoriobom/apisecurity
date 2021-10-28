@@ -21,6 +21,8 @@ public class Plate {
     private Category category;
     @ManyToOne
     private Restaurant restaurant;
+    @ManyToOne
+    private UserRequest userRequest;
 
 
     public Plate() {

@@ -41,13 +41,14 @@ public class PlateController {
 
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     public ResponseEntity<PlateDto> register(@RequestBody @Valid PlateForm plateForm,
                                              UriComponentsBuilder uriBuilder){
        Plate plate = plateForm.convertToPlate(plateForm);
        plateRepository.save(plate);
 
         URI uri = uriBuilder.
+                path("/{id}").
                 buildAndExpand(plate.getId()).
                 toUri();
 

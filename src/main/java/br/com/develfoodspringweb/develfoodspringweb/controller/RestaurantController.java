@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/restaurant")
+@RequestMapping("restaurant")
 public class RestaurantController {
 
     @Autowired
@@ -44,7 +44,7 @@ public class RestaurantController {
         restaurantRepository.save(restaurant);
 
         URI uri = uriComponentsBuilder.
-                path("/{id}").
+                path("{id}").
                 buildAndExpand(restaurant.getId()).
                 toUri();
 

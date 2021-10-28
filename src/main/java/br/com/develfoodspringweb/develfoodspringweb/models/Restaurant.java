@@ -45,8 +45,6 @@ public class Restaurant {
     public Restaurant(RestaurantForm restaurantForm){
         this.name = restaurantForm.getName();
         this.cnpj = restaurantForm.getCnpj();
-        this.login = restaurantForm.getLogin();
-        this.password = restaurantForm.getPassword();
         this.phone = restaurantForm.getPhone();
         this.address = restaurantForm.getAddress();
     }

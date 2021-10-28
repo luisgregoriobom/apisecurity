@@ -4,15 +4,18 @@ import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserDto {
 
     private Long id;
     private String name;
+    private String cpf;
     private String address;
     private String email;
     private String phone;
-    private UserRequest userRequest;
+    private List<UserRequest> userRequest;
 
 
     public UserDto(User user){

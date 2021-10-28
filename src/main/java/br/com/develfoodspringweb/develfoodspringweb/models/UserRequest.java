@@ -20,7 +20,7 @@ public class UserRequest {
     private LocalDateTime dateRequest;
     @ManyToOne
     private User user;
-    @OneToMany
+    @OneToMany(mappedBy = "userRequest")
     private List<Plate> plate;
 
 }

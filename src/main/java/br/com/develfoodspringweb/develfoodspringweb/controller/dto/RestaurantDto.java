@@ -9,15 +9,17 @@ public class RestaurantDto {
 
     private Long id;
     private String name;
-    private String email;
+    private String cnpj;
     private String phone;
-    private Plate plate;
+    private String address;
+
 
     public RestaurantDto(Restaurant restaurant) {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
-        this.email = restaurant.getEmail();
+        this.cnpj = restaurant.getCnpj();
         this.phone = restaurant.getPhone();
+        this.address = restaurant.getAddress();
     }
 
     //Conversão de Restaurant para RestaurantDto
