@@ -4,6 +4,7 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -21,8 +22,8 @@ public class User {
     private String address;
     private String email;
     private String phone;
-    @ManyToOne
-    private UserRequest userRequest;
+    @OneToMany
+    private List<UserRequest> userRequest;
 
     public User() {
     }

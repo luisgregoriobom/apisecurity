@@ -19,8 +19,9 @@ public class Plate {
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @ManyToOne
+    private Restaurant restaurant;
 
-    private Menu menu;
 
     public Plate() {
     }

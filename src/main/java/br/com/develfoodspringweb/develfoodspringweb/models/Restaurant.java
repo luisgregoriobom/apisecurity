@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
@@ -23,13 +24,14 @@ public class Restaurant {
     private String address;
     private String phone;
 
+    @OneToMany(mappedBy = "restaurant")
+    private List<Plate> plate;
 
-    private Menu menu;
 
     public Restaurant(){}
 
 
-    public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, Menu menu) {
+    public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, List plate) {
         this.name = name;
         this.cnpj = cnpj;
         this.login = login;
@@ -37,7 +39,7 @@ public class Restaurant {
         this.email = email;
         this.address = address;
         this.phone = phone;
-        this.menu = menu;
+        this.plate = plate;
     }
 
     public Restaurant(RestaurantForm restaurantForm){

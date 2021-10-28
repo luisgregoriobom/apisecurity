@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "request")
@@ -17,7 +18,7 @@ public class UserRequest {
     @Enumerated(EnumType.STRING)
     private StatusRequest status = StatusRequest.EMPTY;
     private LocalDateTime dateRequest;
-    @ManyToOne
-    private Plate plate;
+    @OneToMany
+    private List<Plate> plate;
 
 }
