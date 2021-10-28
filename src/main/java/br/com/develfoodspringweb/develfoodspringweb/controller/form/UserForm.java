@@ -1,30 +1,25 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller.form;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Data
 public class UserForm {
 
     @NotNull @NotEmpty
     private String name;
     @NotNull @NotEmpty
-    private String login;
-    @NotNull @NotEmpty
-    private String password;
-    @NotNull @NotEmpty
-    private String adress;
+    private String address;
     @NotNull @NotEmpty
     private String email;
     @NotNull @NotEmpty
     private String phone;
 
 
-    public User convertToUser() {
-        return new User(name, login, password, adress, email, phone);
+    public User convertToUser(UserForm userForm) {
+        return new User(name, address, email, phone);
     }
 }

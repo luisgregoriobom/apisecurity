@@ -2,17 +2,14 @@ package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.util.Optional;
-
-@Getter @Setter
+@Data
 public class UserDto {
 
     private Long id;
     private String name;
-    private String adress;
+    private String address;
     private String email;
     private String phone;
     private UserRequest userRequest;
@@ -21,7 +18,7 @@ public class UserDto {
     public UserDto(User user){
         this.id = user.getId();
         this.name = user.getName();
-        this.adress = user.getAdress();
+        this.address = user.getAddress();
         this.email = user.getEmail();
         this.phone = user.getPhone();
 
