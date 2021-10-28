@@ -33,7 +33,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "User name not found");
         }
-         return UserDto.convertToDto(opt.get());
+         return UserDto.convertToUserDto(opt.get());
 
     }
 

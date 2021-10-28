@@ -22,7 +22,7 @@ public class User {
     private String address;
     private String email;
     private String phone;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<UserRequest> userRequest;
 
     public User() {

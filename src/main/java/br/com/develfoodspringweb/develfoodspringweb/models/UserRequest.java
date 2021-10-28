@@ -18,6 +18,8 @@ public class UserRequest {
     @Enumerated(EnumType.STRING)
     private StatusRequest status = StatusRequest.EMPTY;
     private LocalDateTime dateRequest;
+    @ManyToOne
+    private User user;
     @OneToMany
     private List<Plate> plate;
 

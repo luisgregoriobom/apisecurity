@@ -25,7 +25,7 @@ public class UserDto {
     }
 
 //    Método de conversão de Usuario para UsuarioDto sem retornar em Lista
-    public static UserDto convertToDto(User user){
+    public static UserDto convertToUserDto(User user){
         return new UserDto(user);
     }
 

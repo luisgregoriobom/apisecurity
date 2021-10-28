@@ -43,7 +43,8 @@ public class RestaurantController {
         Restaurant restaurant = restaurantForm.convertToRestaurant(restaurantForm);
         restaurantRepository.save(restaurant);
 
-        URI uri = uriComponentsBuilder.path("/restaurant/{id}").
+        URI uri = uriComponentsBuilder.
+                path("/{id}").
                 buildAndExpand(restaurant.getId()).
                 toUri();
 

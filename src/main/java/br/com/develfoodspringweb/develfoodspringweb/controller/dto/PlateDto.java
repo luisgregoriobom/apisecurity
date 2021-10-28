@@ -18,7 +18,7 @@ public class PlateDto {
     }
 
     //Conversão de Restaurant para RestaurantDto
-    public static PlateDto convertPlateToDto(Plate plate){
+    public static PlateDto convertToPlateToDto(Plate plate){
         return new PlateDto(plate);
     }
 }

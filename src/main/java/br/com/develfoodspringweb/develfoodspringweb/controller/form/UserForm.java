@@ -1,4 +1,4 @@
-package br.com.develfoodspringweb.develfoodspringweb.controller.form;@Entity(name = "
+package br.com.develfoodspringweb.develfoodspringweb.controller.form;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import lombok.Data;
