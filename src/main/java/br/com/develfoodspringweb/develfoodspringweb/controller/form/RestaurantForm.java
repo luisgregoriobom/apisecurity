@@ -14,6 +14,8 @@ public class RestaurantForm {
     @NotNull @NotEmpty
     private String name;
     @NotNull @NotEmpty
+    private String cnpj;
+    @NotNull @NotEmpty
     private String login;
     @NotNull @NotEmpty
     private String password;
@@ -21,8 +23,10 @@ public class RestaurantForm {
     private String email;
     @NotNull @NotEmpty
     private String phone;
+    @NotNull @NotEmpty
+    private String address;
 
-    public Restaurant convertToRestaurant(){
-        return new Restaurant(name, login, password, email, phone);
+    public Restaurant convertToRestaurant(RestaurantForm restaurantForm){
+        return new Restaurant(restaurantForm);
     }
 }

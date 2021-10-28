@@ -34,13 +34,13 @@ public class RestaurantController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Restaurant name not found");
         }
-        return RestaurantDto.convertToDto(opt.get());
+        return RestaurantDto.convertToRestaurantDto(opt.get());
     }
 
     @PostMapping
     public ResponseEntity<RestaurantDto> register(@RequestBody @Valid RestaurantForm restaurantForm,
                                                   UriComponentsBuilder uriComponentsBuilder){
-        Restaurant restaurant = restaurantForm.convertToRestaurant();
+        Restaurant restaurant = restaurantForm.convertToRestaurant(restaurantForm);
         restaurantRepository.save(restaurant);
 
         URI uri = uriComponentsBuilder.path("/restaurant/{id}").

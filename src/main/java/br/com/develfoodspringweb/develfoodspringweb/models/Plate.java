@@ -1,31 +1,41 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 
-import lombok.Getter;
-import lombok.Setter;
-
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateForm;
+import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "plate")
-@Getter @Setter
+@Table(name = "plates")
+@Data
 public class Plate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String description;
+    private String obs;
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
-    private PlateCategory category;
+    private Category category;
 
-    public Plate(String name, String description, BigDecimal price, PlateCategory category) {
+    private Menu menu;
+
+    public Plate() {
+    }
+
+    public Plate(String name, String obs, BigDecimal price, Category category) {
         this.name = name;
-        this.description = description;
+        this.obs = obs;
         this.price = price;
         this.category = category;
+    }
+
+    public Plate(PlateForm plateForm){
+        this.name = plateForm.getName();
+        this.obs = plateForm.getObs();
+        this.category = plateForm.getCategory();
     }
 
 }

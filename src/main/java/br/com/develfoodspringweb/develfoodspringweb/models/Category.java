@@ -1,6 +1,6 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
-public enum PlateCategory {
+public enum Category {
 
     SAVORY,
     SWEET;

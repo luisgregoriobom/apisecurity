@@ -37,13 +37,13 @@ public class UserController {
 
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
                                             UriComponentsBuilder uriBuilder){
-       User user = userForm.convertToUser();
+       User user = userForm.convertToUser(userForm);
        userRepository.save(user);
 
-        URI uri = uriBuilder.path("/user/{id}").
+        URI uri = uriBuilder.
                 buildAndExpand(user.getId()).
                 toUri();
 
