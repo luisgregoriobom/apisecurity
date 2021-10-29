@@ -1,19 +1,21 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
-import lombok.*;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.List;
 
-
+@Data
 @Entity
 @Table(name = "users")
 @Data
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String cpf;
@@ -21,6 +23,7 @@ public class User {
     private String password;
     private String address;
     private String email;
+    private String password;
     private String phone;
     @OneToMany(mappedBy = "user")
     private List<UserRequest> userRequest;
@@ -34,6 +37,7 @@ public class User {
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.address = address;
     }
 
     public User(UserForm userForm){

@@ -25,12 +25,9 @@ public class Plate {
     @ManyToOne
     private UserRequest userRequest;
 
-
-    public Plate(String name, String obs, BigDecimal price, Category category) {
+    public Plate(String name, String description, BigDecimal price, PlateCategory category) {
         this.name = name;
         this.obs = obs;
-        this.price = price;
-        this.category = category;
     }
 
     public Plate(PlateForm plateForm){

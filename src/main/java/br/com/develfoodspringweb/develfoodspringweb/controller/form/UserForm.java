@@ -4,19 +4,26 @@ import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Data
 public class UserForm {
 
-    @NotNull @NotEmpty
+    @NotEmpty
+    @NotNull
+    @Length(min = 5)
     private String name;
     @NotNull @NotEmpty
     private String address;
     @NotNull @NotEmpty
     private String email;
-    @NotNull @NotEmpty
+    @NotNull
+    @NotEmpty
+    @Length(min = 5)
     private String phone;
+    @NotNull
+    @NotEmpty
+    @Length(min = 5)
+    private String address;
 
     /**
      * Function to convert the object Form Class received into a Model Object

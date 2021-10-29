@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
+@Data
 @RestController
 @RequestMapping("/user")
 public class UserController {
