@@ -5,6 +5,7 @@ import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import lombok.Data;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class UserDto {
@@ -29,13 +30,15 @@ public class UserDto {
 
     /**
      * Function to convert the object Model class received into a DTO Object class
-     * @param user
+     * @param users
      * @return
      * @author: Thomas B.P.
      */
-    public static UserDto convertToUserDto(User user){
-        return new UserDto(user);
+//    public static UserDto convertToUserDto(User user){
+//        return new UserDto(user);
+//    }
+
+    public static List<UserDto> converter(List<User> users) {
+    return users.stream().map(UserDto::new).collect(Collectors.toList());
     }
-
-
 }
