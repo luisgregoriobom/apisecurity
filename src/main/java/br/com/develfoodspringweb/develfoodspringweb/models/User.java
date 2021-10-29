@@ -25,8 +25,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserRequest> userRequest;
 
-    public User() {
-    }
 
     public User(String name, String cpf, String login, String password, String address, String email, String phone) {
         this.name = name;

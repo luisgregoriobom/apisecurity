@@ -17,8 +17,10 @@ public class PlateDto {
         this.obs = plate.getObs();
     }
 
-    //Conversão de Restaurant para RestaurantDto
-    public static PlateDto convertToPlateToDto(Plate plate){
+    //Conversão de Plate para PlateDto
+    public static PlateDto convertToPlateDto(Plate plate){
         return new PlateDto(plate);
     }
+
+
 }

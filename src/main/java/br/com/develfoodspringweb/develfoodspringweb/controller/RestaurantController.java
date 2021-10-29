@@ -23,7 +23,7 @@ public class RestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    @GetMapping
+    @GetMapping // query de um restaurant
     public RestaurantDto getRestaurantByName(@RequestParam String nameRestaurant){
         if(nameRestaurant == null){
             return null;

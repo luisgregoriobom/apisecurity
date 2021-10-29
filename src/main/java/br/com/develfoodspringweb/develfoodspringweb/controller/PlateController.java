@@ -1,13 +1,9 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.dto.PlateDto;
-import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateForm;
-import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
-import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.PlateRepository;
-import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +16,15 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/plate")
+@RequestMapping("plate")
 public class PlateController {
 
     @Autowired
     private PlateRepository plateRepository;
 
     @GetMapping
-    public PlateDto getUserByName(@RequestParam String namePlate){
-        if(namePlate == null){ //validando o param da query
+    public PlateDto getPlateByName(@RequestParam String namePlate){
+        if(namePlate == null){
             return null;
         }
 
@@ -37,7 +33,8 @@ public class PlateController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Plate name not found");
         }
-         return PlateDto.convertToPlateToDto(opt.get());
+
+         return PlateDto.convertToPlateDto(opt.get());
 
     }
 

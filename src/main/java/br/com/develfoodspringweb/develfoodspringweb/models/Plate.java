@@ -1,6 +1,7 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 
+import br.com.develfoodspringweb.develfoodspringweb.controller.dto.PlateDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateForm;
 import lombok.Data;
 import javax.persistence.*;
@@ -24,9 +25,6 @@ public class Plate {
     @ManyToOne
     private UserRequest userRequest;
 
-
-    public Plate() {
-    }
 
     public Plate(String name, String obs, BigDecimal price, Category category) {
         this.name = name;

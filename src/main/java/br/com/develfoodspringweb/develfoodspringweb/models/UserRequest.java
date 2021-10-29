@@ -1,7 +1,6 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "request")
-@Getter @Setter
+@Data
 public class UserRequest {
 
     @Id

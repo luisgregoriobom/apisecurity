@@ -27,10 +27,6 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant")
     private List<Plate> plate;
 
-
-    public Restaurant(){}
-
-
     public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, List plate) {
         this.name = name;
         this.cnpj = cnpj;
