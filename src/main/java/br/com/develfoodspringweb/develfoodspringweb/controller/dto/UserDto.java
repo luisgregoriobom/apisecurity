@@ -27,7 +27,12 @@ public class UserDto {
 
     }
 
-//    Método de conversão de Usuario para UsuarioDto sem retornar em Lista
+    /**
+     * Function to convert the object Model class received into a DTO Object class
+     * @param user
+     * @return
+     * @author: Thomas B.P.
+     */
     public static UserDto convertToUserDto(User user){
         return new UserDto(user);
     }

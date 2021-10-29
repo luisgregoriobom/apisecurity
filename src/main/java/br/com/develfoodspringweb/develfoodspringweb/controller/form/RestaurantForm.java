@@ -24,6 +24,12 @@ public class RestaurantForm {
 
     private List<Plate> plates;
 
+    /**
+     * Function to convert the object Form Class received into a Model Object
+     * @param restaurantForm
+     * @return
+     * @author: Thomas B.P.
+     */
     public Restaurant convertToRestaurant(RestaurantForm restaurantForm){
         return new Restaurant(restaurantForm);
     }

@@ -16,9 +16,7 @@ public class InitialConfig {
     private RestaurantRepository restaurantRepository;
 
     public void configurar(){
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName("testName");
-        restaurant.setPhone("333");
+        Restaurant restaurant = new Restaurant("testName", "3333");
         restaurantRepository.save(restaurant);
 
 //        User user = new User();

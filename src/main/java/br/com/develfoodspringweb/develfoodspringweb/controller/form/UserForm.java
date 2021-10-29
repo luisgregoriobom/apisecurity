@@ -18,6 +18,12 @@ public class UserForm {
     @NotNull @NotEmpty
     private String phone;
 
+    /**
+     * Function to convert the object Form Class received into a Model Object
+     * @param userForm
+     * @return
+     * @author: Thomas B.P.
+     */
     public User convertToUser(UserForm userForm){
         return new User(userForm);
     }

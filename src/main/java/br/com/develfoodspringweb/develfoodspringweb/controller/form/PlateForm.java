@@ -18,6 +18,12 @@ public class PlateForm {
     @NotNull @NotEmpty
     private Category category;
 
+    /**
+     * Function to convert the object Form Class received into a Model Object.
+     * @param plateForm
+     * @return
+     * @author: Thomas B.P.
+     */
     public Plate convertToPlate(PlateForm plateForm){
         return new Plate(plateForm);
     }

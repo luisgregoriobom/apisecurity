@@ -22,6 +22,12 @@ public class PlateController {
     @Autowired
     private PlateRepository plateRepository;
 
+    /**
+     * Function with GET method to do make a query with the name of the plate as parameter.
+     * @param namePlate
+     * @return
+     * @author: Thomas B.P.
+     */
     @GetMapping
     public PlateDto getPlateByName(@RequestParam String namePlate){
         if(namePlate == null){
@@ -38,6 +44,13 @@ public class PlateController {
 
     }
 
+    /**
+     * Function with POST method to register new Plate while the function create the URI route and return the head HTTP location with the URL
+     * @param plateForm
+     * @param uriBuilder
+     * @return
+     * @author: Thomas B.P.
+     */
     @PostMapping
     public ResponseEntity<PlateDto> register(@RequestBody @Valid PlateForm plateForm,
                                              UriComponentsBuilder uriBuilder){

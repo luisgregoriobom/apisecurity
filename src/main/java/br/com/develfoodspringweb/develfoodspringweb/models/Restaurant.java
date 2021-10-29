@@ -45,6 +45,16 @@ public class Restaurant {
         this.address = restaurantForm.getAddress();
     }
 
+    /**
+     * Constructor created just to manually add data into the database with configurar method that belong to InitialConfig class on configuration package
+     * @param name
+     * @param phone
+     * @author: Thomas B.P.
+     */
+    public Restaurant(String name, String phone){
+        this.name = name;
+        this.phone = phone;
+    }
 
 }
 

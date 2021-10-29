@@ -21,7 +21,12 @@ public class RestaurantDto {
         this.address = restaurant.getAddress();
     }
 
-    //Conversão de Restaurant para RestaurantDto
+    /**
+     * Function to convert the object Model class received into a DTO Object class
+     * @param restaurant
+     * @return
+     * @author: Thomas B.P.
+     */
     public static RestaurantDto convertToRestaurantDto(Restaurant restaurant){
         return new RestaurantDto(restaurant);
     }

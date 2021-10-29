@@ -18,6 +18,12 @@ public class DevelfoodSpringwebApplication implements CommandLineRunner{
 
 	}
 
+	/**
+	 * Method to manually add data into the database
+	 * @param args
+	 * @throws Exception
+	 * @author: Thomas B.P.
+	 */
 	@Override
 	public void run(String... args) throws Exception {
 		initialConfig.configurar();

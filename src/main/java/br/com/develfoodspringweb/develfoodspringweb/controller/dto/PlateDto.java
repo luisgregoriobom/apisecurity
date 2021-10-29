@@ -17,7 +17,12 @@ public class PlateDto {
         this.obs = plate.getObs();
     }
 
-    //Conversão de Plate para PlateDto
+    /**
+     * Function to convert the object Model class received into a DTO Object class
+     * @param plate
+     * @return
+     * @author: Thomas B.P.
+     */
     public static PlateDto convertToPlateDto(Plate plate){
         return new PlateDto(plate);
     }

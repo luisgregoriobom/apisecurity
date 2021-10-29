@@ -23,7 +23,13 @@ public class RestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    @GetMapping // query de um restaurant
+    /**
+     * Function with GET method to do make a query with the name of the restaurant as parameter.
+     * @param nameRestaurant
+     * @return
+     * @author: Thomas B.P.
+     */
+    @GetMapping
     public RestaurantDto getRestaurantByName(@RequestParam String nameRestaurant){
         if(nameRestaurant == null){
             return null;
@@ -37,6 +43,13 @@ public class RestaurantController {
         return RestaurantDto.convertToRestaurantDto(opt.get());
     }
 
+    /**
+     * Function with POST method to register new Restaurant while the function create the URI route and return the head HTTP location with the URL
+     * @param restaurantForm
+     * @param uriComponentsBuilder
+     * @return
+     * @author: Thomas B.P.
+     */
     @PostMapping
     public ResponseEntity<RestaurantDto> register(@RequestBody @Valid RestaurantForm restaurantForm,
                                                   UriComponentsBuilder uriComponentsBuilder){

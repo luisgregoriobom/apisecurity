@@ -22,6 +22,12 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Function with GET method to do make a query with the name of the user as parameter.
+     * @param nameUser
+     * @return
+     * @author: Thomas B.P.
+     */
     @GetMapping
     public UserDto getUserByName(@RequestParam String nameUser){
         if(nameUser == null){ //validando o param da query
@@ -37,6 +43,13 @@ public class UserController {
 
     }
 
+    /**
+     * Function with POST method to register new User while the function create the URI route and return the head HTTP location with the URL
+     * @param userForm
+     * @param uriBuilder
+     * @return
+     * @author: Thomas B.P.
+     */
     @PostMapping
     public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
                                             UriComponentsBuilder uriBuilder){
