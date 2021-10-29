@@ -1,6 +1,7 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
+import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import lombok.Data;
 
 import java.util.List;

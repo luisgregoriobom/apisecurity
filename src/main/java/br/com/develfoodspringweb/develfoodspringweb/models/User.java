@@ -2,8 +2,6 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
-@Data
 public class User {
 
 
@@ -23,7 +20,6 @@ public class User {
     private String password;
     private String address;
     private String email;
-    private String password;
     private String phone;
     @OneToMany(mappedBy = "user")
     private List<UserRequest> userRequest;
@@ -45,5 +41,6 @@ public class User {
         this.address = userForm.getAddress();
         this.email = userForm.getEmail();
         this.phone = userForm.getPhone();
+        this.address = userForm.getAddress();
     }
 }

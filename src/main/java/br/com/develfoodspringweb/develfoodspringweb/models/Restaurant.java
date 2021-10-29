@@ -2,8 +2,6 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import lombok.Data;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
