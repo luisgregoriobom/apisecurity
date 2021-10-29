@@ -2,12 +2,17 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
 @Data
+@NoArgsConstructor
 public class Restaurant {
 
     @Id
@@ -23,6 +28,8 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<Plate> plate;
+
+
 
     public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, List plate) {
         this.name = name;
