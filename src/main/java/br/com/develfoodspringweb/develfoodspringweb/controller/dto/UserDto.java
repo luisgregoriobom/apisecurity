@@ -3,6 +3,7 @@ package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,8 +14,9 @@ public class UserDto {
     private Long id;
     private String name;
     private String cpf;
-    private String address;
+    private String login;
     private String email;
+    private String address;
     private String phone;
     private List<UserRequest> userRequest;
 
@@ -22,10 +24,11 @@ public class UserDto {
     public UserDto(User user) {
         this.id = user.getId();
         this.name = user.getName();
-        this.address = user.getAddress();
+        this.cpf = user.getCpf();
+        this.login = user.getLogin();
         this.email = user.getEmail();
-        this.phone = user.getPhone();
         this.address = user.getAddress();
+        this.phone = user.getPhone();
     }
 
     /**

@@ -10,17 +10,19 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserForm {
 
-    @NotEmpty
-    @NotNull
-    @Length(min = 5)
+    @NotEmpty @NotNull @Length(min = 5)
     private String name;
-    @NotNull @NotEmpty
-    private String address;
-    @NotNull @NotEmpty
+    @NotNull @NotEmpty @Length(min = 11)
+    private String cpf;
+    @NotNull @NotEmpty @Length(min = 5)
+    private String login;
+    @NotNull @NotEmpty @Length(min = 5)
+    private String password;
+    @NotNull @NotEmpty @Length(min = 5)
     private String email;
-    @NotNull
-    @NotEmpty
-    @Length(min = 5)
+    @NotNull @NotEmpty @Length(min = 5)
+    private String address;
+    @NotNull @NotEmpty @Length(min = 11)
     private String phone;
 
     /**
@@ -30,7 +32,7 @@ public class UserForm {
      * @author: Thomas B.P.
      */
     public User convertToUser(UserForm userForm){
-        return new User(userForm);
+        return new User(name, cpf, login, password, email, address, phone);
     }
 
 }
