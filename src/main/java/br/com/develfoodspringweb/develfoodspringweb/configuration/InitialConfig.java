@@ -1,7 +1,6 @@
 package br.com.develfoodspringweb.develfoodspringweb.configuration;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
-import br.com.develfoodspringweb.develfoodspringweb.repository.PlateRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ public class InitialConfig {
     private UserRepository userRepository;
     @Autowired
     private RestaurantRepository restaurantRepository;
-    @Autowired
-    private PlateRepository plateRepository;
 
     public void configurar(){
 //        Plate plate = new Plate();
