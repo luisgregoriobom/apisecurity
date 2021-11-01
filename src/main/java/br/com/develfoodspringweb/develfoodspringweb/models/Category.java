@@ -2,7 +2,7 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 
 public enum Category {
 
-    SAVORY,
+    SALTY,
     SWEET;
 
 }
