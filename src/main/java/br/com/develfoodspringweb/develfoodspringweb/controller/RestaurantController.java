@@ -2,6 +2,7 @@ package br.com.develfoodspringweb.develfoodspringweb.controller;
 
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.dto.RestaurantDto;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.FilterForm;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,10 +74,17 @@ public class RestaurantController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<RestaurantDto>> list(){
+    public ResponseEntity<List<RestaurantDto>> list(@RequestBody  FilterForm filterForm, Pageable pageable){ //e se o filtro vier nulo????????
 
-        Pageable pageable = PageRequest.of(0, 2, Sort.by(Sort.Direction.ASC, "id"));
-        Page<Restaurant> restaurants = restaurantRepository.findAll(pageable);
+        Pageable pageByFilter = PageRequest.of(filterForm.getSkip()
+                ,filterForm.getTake()
+                ,Sort.by(Sort.Direction.ASC, "id"));
+
+        Page<Restaurant> restaurants = restaurantRepository.findAll(Specification
+                .where(RestaurantRepository.filterByName(filterForm.getSearch()))
+                .or(RestaurantRepository.filterByFoodType(filterForm.getSearch()))
+                , pageByFilter);
+
         List<RestaurantDto> restaurantDtoList = new ArrayList<>();
 
         restaurants.stream().map(restaurant -> restaurantDtoList.add(new RestaurantDto(restaurant))).collect(Collectors.toList());
