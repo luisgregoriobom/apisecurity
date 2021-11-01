@@ -24,8 +24,6 @@ public class RestaurantDto {
         this.address = restaurant.getAddress();
     }
 
-    @Autowired
-    RestaurantRepository restaurantRepository;
     /**
      * Function to convert the object Model class received into a DTO Object class
      * @param restaurant

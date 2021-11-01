@@ -25,13 +25,13 @@ public class Restaurant {
     private String email;
     private String address;
     private String phone;
+    private String foodType;
 
     @OneToMany(mappedBy = "restaurant")
     private List<Plate> plate;
 
 
-
-    public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, List plate) {
+    public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, String foodType, List plate) {
         this.name = name;
         this.cnpj = cnpj;
         this.login = login;
@@ -39,6 +39,7 @@ public class Restaurant {
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.foodType = foodType;
         this.plate = plate;
     }
 
@@ -55,10 +56,11 @@ public class Restaurant {
      * @param phone
      * @author: Thomas B.P.
      */
-    public Restaurant(String name, String cnpj, String phone){
+    public Restaurant(String name, String cnpj, String phone, String foodType){
         this.name = name;
         this.cnpj = cnpj;
         this.phone = phone;
+        this.foodType = foodType;
     }
 
 }

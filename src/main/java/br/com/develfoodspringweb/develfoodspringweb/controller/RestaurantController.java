@@ -74,7 +74,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<RestaurantDto>> list(@RequestBody  FilterForm filterForm, Pageable pageable){ //e se o filtro vier nulo????????
+    public ResponseEntity<List<RestaurantDto>> list(@RequestBody  FilterForm filterForm, Pageable pageable){ //ignore case sensitive
 
         Pageable pageByFilter = PageRequest.of(filterForm.getSkip()
                 ,filterForm.getTake()
@@ -88,7 +88,7 @@ public class RestaurantController {
         List<RestaurantDto> restaurantDtoList = new ArrayList<>();
 
         restaurants.stream().map(restaurant -> restaurantDtoList.add(new RestaurantDto(restaurant))).collect(Collectors.toList());
-        return new ResponseEntity<List<RestaurantDto>>(restaurantDtoList, HttpStatus.OK);
+        return new ResponseEntity<>(restaurantDtoList, HttpStatus.OK);
 
     }
 
