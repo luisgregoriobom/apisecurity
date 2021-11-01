@@ -14,7 +14,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("restaurant")
@@ -63,4 +66,16 @@ public class RestaurantController {
 
         return ResponseEntity.created(uri).body(new RestaurantDto(restaurant));
     }
+
+    @PostMapping("/list")
+    public ResponseEntity<List<RestaurantDto>> list(){
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+
+        List<RestaurantDto> restaurantDtoList = new ArrayList<>();
+
+        restaurants.stream().map(restaurant -> restaurantDtoList.add(new RestaurantDto(restaurant))).collect(Collectors.toList());
+        return new ResponseEntity<List<RestaurantDto>>(restaurantDtoList, HttpStatus.OK);
+
+    }
+
 }

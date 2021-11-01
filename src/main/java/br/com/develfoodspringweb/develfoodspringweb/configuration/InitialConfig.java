@@ -25,7 +25,7 @@ public class InitialConfig {
 //        plate.setPrice(new BigDecimal(23.05));
 //        plateRepository.save(plate);
 
-        Restaurant restaurant = new Restaurant("testName", "3333");
+        Restaurant restaurant = new Restaurant("testName03", "testCnpj03", "testPhone03");
         restaurantRepository.save(restaurant);
 
 //        User user = new User();

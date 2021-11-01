@@ -55,8 +55,9 @@ public class Restaurant {
      * @param phone
      * @author: Thomas B.P.
      */
-    public Restaurant(String name, String phone){
+    public Restaurant(String name, String cnpj, String phone){
         this.name = name;
+        this.cnpj = cnpj;
         this.phone = phone;
     }
 
