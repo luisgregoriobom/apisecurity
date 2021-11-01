@@ -33,7 +33,6 @@ public class ControllerAuthentication { //Controller que autentica email e senha
         try {
             Authentication authentication = authManager.authenticate(loginInformation); //chamar classe AuthenticationService
             String token = tokenServ.generateToken(authentication);
-
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().build();

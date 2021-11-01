@@ -37,9 +37,6 @@ public class UserDto {
      * @return
      * @author: Thomas B.P.
      */
-//    public static UserDto convertToUserDto(User user){
-//        return new UserDto(user);
-//    }
 
     public static List<UserDto> converter(List<User> users) {
     return users.stream().map(UserDto::new).collect(Collectors.toList());

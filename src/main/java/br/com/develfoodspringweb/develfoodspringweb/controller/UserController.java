@@ -14,10 +14,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Arrays;
@@ -33,6 +35,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     @GetMapping
+    @Transactional
     public List<UserDto> list(String userName) {
         if (userName == null) {
             List<User> users = userRepository.findAll();
@@ -44,16 +47,20 @@ public class UserController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder){
-        User user = userForm.convertToUser(userForm);
+        User user = userForm.convertToUser(userRepository);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userRepository.save(user);
-
         URI uri = uriBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(new UserDto(user));
 
     }
 
     @GetMapping("/{id}")
+    @Transactional
     public ResponseEntity<UserDto> details(@PathVariable Long id) {
         Optional<User> user = userRepository.findById(id);
         if(user.isPresent()) {
@@ -65,16 +72,23 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormUpdate userFormUpdate) {
         Optional<User> opt = userRepository.findById(id);
         if(opt.isPresent()) {
             User user = userFormUpdate.update(id, userRepository);
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
             return ResponseEntity.ok(new UserDto(user));
+
         }
+
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> delete(@PathVariable Long id) {
         Optional<User> opt = userRepository.findById(id);
         if(opt.isPresent()) {

@@ -3,6 +3,7 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 ////////////////////////////////////CLASSE PERFIL COM INFORMAÇÕES DO USUÁRIO///////////////////////////////////
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 

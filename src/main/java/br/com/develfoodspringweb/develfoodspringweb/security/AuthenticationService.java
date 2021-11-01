@@ -1,13 +1,16 @@
 package br.com.develfoodspringweb.develfoodspringweb.security;
 
 
+import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
+import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,16 +20,19 @@ import java.util.Optional;
 public class AuthenticationService implements UserDetailsService {//Spring entenderá com essa classe é onde
                                                                     //contém a lógica de Autenticação
     private final UserRepository repository;
+    private final RestaurantRepository restaurantRepository;
 
     @Override //Lógica de Autenticação, irá procurar o email no DB, caso não ache retorna uma exception
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = repository.findByEmail(username);
-        if(user.isPresent()) {
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        Optional<User> user = repository.findByEmail(name);
+        if (user.isPresent()) {
             return user.get();
         }
+        Optional<Restaurant> restaurant = restaurantRepository.findByEmail(name);
+        if (restaurant.isPresent()) {
+            return restaurant.get();
+        }
         throw new UsernameNotFoundException("Dados Inválidos");
+
     }
-
-
-
 }

@@ -1,8 +1,11 @@
 package br.com.develfoodspringweb.develfoodspringweb.security;
 
+import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
@@ -22,9 +26,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //Classe java padrão, @Configuration mostra ao Spring pra inicializar a classe junto com o programa
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
+
     private final AuthenticationService authenticationService;
     private final TokenServ tokenService;
     private final UserRepository userRepository;
+    private final RestaurantRepository restaurantRepository;
+
 
     @Override
     @Bean
@@ -38,6 +45,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     // AuthenticationService = Classe que contem a Lógica de Autenticação
         auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
 
+
     }
 
     //Configurações de Autorização
@@ -46,12 +54,16 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/api/user").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/user/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/restaurant").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/restaurant/*").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/auth").permitAll()
                 .antMatchers("/h2-console").permitAll()
+                .antMatchers("/h2-console/*").permitAll()
                 .anyRequest().authenticated()
+                .and().headers().frameOptions().sameOrigin()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(new AuthenticationTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
+                .and().addFilterBefore(new AuthenticationTokenFilter(tokenService, userRepository, restaurantRepository), UsernamePasswordAuthenticationFilter.class);
 
     }
 

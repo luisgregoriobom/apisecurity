@@ -2,6 +2,7 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateForm;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
