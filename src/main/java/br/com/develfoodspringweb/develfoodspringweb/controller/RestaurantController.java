@@ -6,6 +6,10 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantFo
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,8 +73,9 @@ public class RestaurantController {
 
     @PostMapping("/list")
     public ResponseEntity<List<RestaurantDto>> list(){
-        List<Restaurant> restaurants = restaurantRepository.findAll();
 
+        Pageable pageable = PageRequest.of(0, 2, Sort.by(Sort.Direction.ASC, "id"));
+        Page<Restaurant> restaurants = restaurantRepository.findAll(pageable);
         List<RestaurantDto> restaurantDtoList = new ArrayList<>();
 
         restaurants.stream().map(restaurant -> restaurantDtoList.add(new RestaurantDto(restaurant))).collect(Collectors.toList());
