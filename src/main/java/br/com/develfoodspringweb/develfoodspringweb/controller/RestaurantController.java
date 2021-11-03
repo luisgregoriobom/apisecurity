@@ -6,6 +6,7 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.FilterForm;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
+import br.com.develfoodspringweb.develfoodspringweb.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +23,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,6 +32,8 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
+    @Autowired
+    private RestaurantService restaurantService;
 
     /**
      * Function with GET method to do make a query with the name of the restaurant as parameter.
@@ -45,12 +47,12 @@ public class RestaurantController {
             return null;
         }
 
-        Optional<Restaurant> opt = restaurantRepository.findByName(nameRestaurant);
-        if (!opt.isPresent()){
+        RestaurantDto queryByName = restaurantService.getRestaurantByName(nameRestaurant);
+        if (queryByName == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Restaurant name not found");
         }
-        return RestaurantDto.convertToRestaurantDto(opt.get());
+        return queryByName;
     }
 
     /**
@@ -63,33 +65,24 @@ public class RestaurantController {
     @PostMapping
     public ResponseEntity<RestaurantDto> register(@RequestBody @Valid RestaurantForm restaurantForm,
                                                   UriComponentsBuilder uriComponentsBuilder){
-        Restaurant restaurant = restaurantForm.convertToRestaurant(restaurantForm);
-        restaurantRepository.save(restaurant);
 
-        URI uri = uriComponentsBuilder.
-                path("{id}").
-                buildAndExpand(restaurant.getId()).
-                toUri();
+        RestaurantDto restaurantToRegister = restaurantService.register(restaurantForm);
 
-        return ResponseEntity.created(uri).body(new RestaurantDto(restaurant));
+        URI uri = uriComponentsBuilder
+                .path("{id}")
+                .buildAndExpand(restaurantToRegister.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(restaurantToRegister);
+
     }
 
-    @PostMapping("/list")
-    public ResponseEntity<List<RestaurantDto>> list(@RequestBody  FilterForm filterForm, Pageable pageable){
+    @PostMapping("/filter")
+    public ResponseEntity<List<RestaurantDto>> filter(@RequestBody  FilterForm filterForm,
+                                                      Pageable pageable){
 
-        Pageable pageByFilter = PageRequest.of(filterForm.getSkip()
-                ,filterForm.getTake()
-                ,Sort.by(Sort.Direction.ASC, "id"));
-
-        Page<Restaurant> restaurants = restaurantRepository.findAll(Specification
-                .where(RestaurantRepository.filterByNameIgnoreCase(filterForm.getSearch().toLowerCase()))
-                .or(RestaurantRepository.filterByFoodType(filterForm.getSearch().toLowerCase()))
-                , pageByFilter);
-
-        List<RestaurantDto> restaurantDtoList = new ArrayList<>();
-
-        restaurants.stream().map(restaurant -> restaurantDtoList.add(new RestaurantDto(restaurant))).collect(Collectors.toList());
-        return new ResponseEntity<>(restaurantDtoList, HttpStatus.OK);
+        List<RestaurantDto> listOfFilter = restaurantService.filter(filterForm, pageable);
+        return new ResponseEntity<>(listOfFilter, HttpStatus.OK);
 
     }
 

@@ -4,6 +4,7 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.dto.PlateDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
 import br.com.develfoodspringweb.develfoodspringweb.repository.PlateRepository;
+import br.com.develfoodspringweb.develfoodspringweb.service.PlateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class PlateController {
 
     @Autowired
     private PlateRepository plateRepository;
+    @Autowired
+    private PlateService plateService;
 
     /**
      * Function with GET method to do make a query with the name of the plate as parameter.
@@ -34,13 +37,12 @@ public class PlateController {
             return null;
         }
 
-        Optional<Plate> opt = plateRepository.findByName(namePlate);
-        if (!opt.isPresent()) {
+        PlateDto queryByName = plateService.getPlateByName(namePlate);
+        if (queryByName == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Plate name not found");
         }
-
-         return PlateDto.convertToPlateDto(opt.get());
+        return queryByName;
 
     }
 
@@ -54,15 +56,15 @@ public class PlateController {
     @PostMapping
     public ResponseEntity<PlateDto> register(@RequestBody @Valid PlateForm plateForm,
                                              UriComponentsBuilder uriBuilder){
-       Plate plate = plateForm.convertToPlate(plateForm);
-       plateRepository.save(plate);
+
+       PlateDto plateToRegister = plateService.register(plateForm);
 
         URI uri = uriBuilder.
                 path("/{id}").
-                buildAndExpand(plate.getId()).
+                buildAndExpand(plateToRegister.getId()).
                 toUri();
 
-       return ResponseEntity.created(uri).body(new PlateDto(plate));
+       return ResponseEntity.created(uri).body(plateToRegister);
     }
 
 }

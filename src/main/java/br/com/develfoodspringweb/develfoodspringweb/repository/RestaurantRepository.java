@@ -11,7 +11,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
 
     Optional<Restaurant> findByName(String nameRestaurant);
 
-    public static Specification<Restaurant> filterByNameIgnoreCase(String name){
+    public static Specification<Restaurant> filterByName(String name){
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name + "%");
     }
 

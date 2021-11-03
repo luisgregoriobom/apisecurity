@@ -4,6 +4,7 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
+import br.com.develfoodspringweb.develfoodspringweb.service.UserService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     /**
      * Function with GET method to do make a query with the name of the user as parameter.
@@ -36,12 +39,12 @@ public class UserController {
             return null;
         }
 
-        Optional<User> opt = userRepository.findByName(nameUser);
-        if (!opt.isPresent()) {
+        UserDto queryByName = userService.getUserByName(nameUser);
+        if (queryByName == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "User name not found");
         }
-         return UserDto.convertToUserDto(opt.get());
+         return queryByName;
 
     }
 
@@ -55,15 +58,14 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
                                             UriComponentsBuilder uriBuilder){
-       User user = userForm.convertToUser(userForm);
-       userRepository.save(user);
+        UserDto userToRegister = userService.register(userForm);
 
-        URI uri = uriBuilder.
-                path("/{id}").
-                buildAndExpand(user.getId()).
-                toUri();
+        URI uri = uriBuilder
+                .path("{id}")
+                .buildAndExpand(userToRegister.getId())
+                .toUri();
 
-       return ResponseEntity.created(uri).body(new UserDto(user));
+       return ResponseEntity.created(uri).body(userToRegister);
     }
 
 }
