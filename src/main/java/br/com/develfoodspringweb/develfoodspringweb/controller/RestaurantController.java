@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -74,15 +75,15 @@ public class RestaurantController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<RestaurantDto>> list(@RequestBody  FilterForm filterForm, Pageable pageable){ //ignore case sensitive
+    public ResponseEntity<List<RestaurantDto>> list(@RequestBody  FilterForm filterForm, Pageable pageable){
 
         Pageable pageByFilter = PageRequest.of(filterForm.getSkip()
                 ,filterForm.getTake()
                 ,Sort.by(Sort.Direction.ASC, "id"));
 
         Page<Restaurant> restaurants = restaurantRepository.findAll(Specification
-                .where(RestaurantRepository.filterByName(filterForm.getSearch()))
-                .or(RestaurantRepository.filterByFoodType(filterForm.getSearch()))
+                .where(RestaurantRepository.filterByNameIgnoreCase(filterForm.getSearch().toLowerCase()))
+                .or(RestaurantRepository.filterByFoodType(filterForm.getSearch().toLowerCase()))
                 , pageByFilter);
 
         List<RestaurantDto> restaurantDtoList = new ArrayList<>();

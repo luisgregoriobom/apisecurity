@@ -9,5 +9,4 @@ public class FilterForm {
     public int take = 5;
     public String search;
 
-
 }
