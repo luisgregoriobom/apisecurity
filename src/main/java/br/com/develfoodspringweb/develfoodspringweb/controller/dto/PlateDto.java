@@ -14,14 +14,16 @@ public class PlateDto {
 
     private Long id;
     private String name;
+    private String obs;
     private BigDecimal price;
-    private Category category;
+    private Enum category;
     private Restaurant restaurant;
 
 
     public PlateDto(Plate plate) {
         this.id = plate.getId();
         this.name = plate.getName();
+        this.obs = plate.getObs();
         this.price = plate.getPrice();
         this.category = plate.getCategory();
         this.restaurant = plate.getRestaurant();
@@ -33,9 +35,9 @@ public class PlateDto {
      * @return
      * @author: Thomas B.P.
      */
-    public static PlateDto convertToPlateDto(Plate plates){
-        return new PlateDto(plates);
-    }
+//    public static PlateDto convertToPlateDto(Plate plates){
+//        return new PlateDto(plates);
+//    }
 
     //conversao de plateodto para lista de platedto
     public static List<PlateDto> convert(List<Plate> plates) {
