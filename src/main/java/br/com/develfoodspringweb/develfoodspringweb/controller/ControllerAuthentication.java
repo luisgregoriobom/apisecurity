@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+/**
+ * Created by Luis Gregorio.
+ * Class generated to implement the Controller that authenticates email and password.
+ */
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ControllerAuthentication {
 
     private final AuthenticationManager authManager;
-
     private final TokenServ tokenServ;
 
     /**
@@ -32,11 +35,9 @@ public class ControllerAuthentication {
      * @return
      * @author: Luis Gregorio
      */
-
     @PostMapping
     public ResponseEntity<TokenDto> authenticate(@RequestBody @Valid LoginForm form) {
         UsernamePasswordAuthenticationToken loginInformation = form.converter();
-
         try {
             Authentication authentication = authManager.authenticate(loginInformation);
             String token = tokenServ.generateToken(authentication);

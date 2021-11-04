@@ -14,8 +14,6 @@ import java.util.List;
 @Data
 public class RestaurantForm {
 
-
-
     @NotEmpty @NotNull @Length(min = 5)
     private String name;
     @NotNull @NotEmpty @Length(min = 11)
@@ -33,16 +31,13 @@ public class RestaurantForm {
 
     private List<Plate> plates;
 
-
     /**
      * Function to convert the object Form Class received into a Model Object
      * @param restaurantRepository
      * @return
      * @author: Thomas B.P.
      */
-
     public Restaurant converterToRestaurant(RestaurantRepository restaurantRepository) {
         return new Restaurant(name, cnpj, login, password, email, address, phone);
     }
-
 }

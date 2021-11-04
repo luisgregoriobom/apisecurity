@@ -20,12 +20,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Created by Luis Gregorio.
+ * Class that configures authentication, authorization and endpoints
+ */
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
-
 
     private final AuthenticationService authenticationService;
     private final TokenServ tokenService;
@@ -38,7 +40,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
      * @throws Exception
      * @author: Luis Gregorio
      */
-
     @Override
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
@@ -51,7 +52,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
      * @throws Exception
      * @author: Luis Gregorio
      */
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
@@ -63,7 +63,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
      * @param http
      * @throws Exception
      */
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -79,7 +78,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationTokenFilter(tokenService, userRepository, restaurantRepository), UsernamePasswordAuthenticationFilter.class);
-
     }
 }
 

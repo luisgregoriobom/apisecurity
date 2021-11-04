@@ -2,6 +2,10 @@ package br.com.develfoodspringweb.develfoodspringweb.configuration.valid;
 
 import lombok.Data;
 
+/**
+ * Created by Luis Gregorio.
+ * Class created to alert the user what needs to be filled in requests
+ */
 @Data
 public class FormErrorDto {
 
@@ -14,7 +18,6 @@ public class FormErrorDto {
      * @param error
      * @author: Luis Gregorio
      */
-
     public FormErrorDto(String field, String error) {
         this.field = field;
         this.error = error;

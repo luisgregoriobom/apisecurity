@@ -65,20 +65,18 @@ public class Restaurant implements UserDetails {
         this.phone = phone;
     }
 
-
-    ////////////////////MÉTODOS DE PERMISSÃO PARA ACESSO DO USUARIO AUTENTICAR NO SISTEMA///////////////////////
-
+    /**
+     * Permission methods for user access to authenticate in the system
+     * For SpringSecurity, in addition to the Restaurant, we need to have a class to represent,
+     *the profile related to Restaurant permissions.
+     *
+     * Profile is an entity, there must be Cardinality from Restaurant to Profile,
+     *restaurant can have multiple Profiles, and Profile can be linked to multiple Restaurants.
+     *
+     * Implemented methods of the UserDetails interface
+     */
     @ManyToMany
     private List<Profile> restaurantProfile = new ArrayList<>();
-
-    // Pro SpringSecurity, além do Restaurant, precisamos ter uma classe pra representar
-    // o Perfil relacionado com as permissões do Restaurant
-
-
-    //Como Profile é uma entidade, tem de haver Cardinalidade de Restaurant para Profile
-    //Restaurant pode ter varios Profiles e Profile pode estar atrelado a vários Restaurants
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -114,7 +112,6 @@ public class Restaurant implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
 
 

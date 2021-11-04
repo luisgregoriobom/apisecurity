@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 @Data
 public class RestaurantDto {
 
-
-
     private Long id;
     private String name;
     private String cnpj;

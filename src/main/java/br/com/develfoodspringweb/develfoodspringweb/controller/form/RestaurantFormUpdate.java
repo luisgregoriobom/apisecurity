@@ -9,6 +9,10 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Created by Luis Gregorio.
+ * In this class we can define what data a restaurant can update in the system.
+ */
 public class RestaurantFormUpdate {
 
     @NotNull @NotEmpty @Length(min = 5)
@@ -23,7 +27,6 @@ public class RestaurantFormUpdate {
      * @return
      * @author: Luis Gregorio
      */
-
     public Restaurant update(Long id, RestaurantRepository restaurantRepository) {
         Restaurant restaurant = restaurantRepository.getById(id);
         restaurant.setAddress(this.address);
@@ -31,5 +34,4 @@ public class RestaurantFormUpdate {
 
         return restaurant;
     }
-
 }

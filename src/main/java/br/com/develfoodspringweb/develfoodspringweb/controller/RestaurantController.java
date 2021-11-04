@@ -26,6 +26,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+
+/**
+ * Created by Luis Gregorio.
+ * Class that performs the methods of listing, registering, detailing, updating and removing from a restaurant.
+ */
 @Data
 @RestController
 @RequestMapping("/api/restaurant")
@@ -40,10 +45,9 @@ public class RestaurantController {
      * @return
      * @author: Luis Gregorio
      */
-
-    @GetMapping
-    @Transactional
-    public List<RestaurantDto> list(String name) {
+        @GetMapping
+        @Transactional
+        public List<RestaurantDto> list(String name) {
         if (name == null) {
             List<Restaurant> restaurants = restaurantRepository.findAll();
             return RestaurantDto.convertToRestaurantDto(restaurants);
@@ -60,7 +64,6 @@ public class RestaurantController {
      * @return
      * @author: Luis Gregorio
      */
-
         @PostMapping
         @Transactional
         public ResponseEntity<RestaurantDto> register(@RequestBody @Valid RestaurantForm form, UriComponentsBuilder uriBuilder) {
@@ -79,15 +82,13 @@ public class RestaurantController {
      * @return
      * @author: Luis Gregorio
      */
-
-    @GetMapping("/{id}")
+        @GetMapping("/{id}")
         @Transactional
         public ResponseEntity<RestaurantDto> details(@PathVariable Long id) {
             Optional<Restaurant> restaurant = restaurantRepository.findById(id);
             if(restaurant.isPresent()) {
                 return ResponseEntity.ok(new RestaurantDto(restaurant.get()));
             }
-
             return ResponseEntity.notFound().build();
      }
 
@@ -98,7 +99,6 @@ public class RestaurantController {
      * @return
      * @author: Luis Gregorio
      */
-
         @PutMapping("/{id}")
         @Transactional
         public ResponseEntity<RestaurantDto> update(@PathVariable Long id, @RequestBody @Valid RestaurantFormUpdate form){

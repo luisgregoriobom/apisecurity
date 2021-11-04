@@ -26,6 +26,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by Luis Gregorio.
+ * Class that performs the methods of listing, registering, detailing, updating and removing from a user.
+ */
 @Data
 @RestController
 @RequestMapping("/api/user")
@@ -40,10 +44,9 @@ public class UserController {
      * @return
      * @author: Luis Gregorio
      */
-
-    @GetMapping
-    @Transactional
-    public List<UserDto> list(String userName) {
+        @GetMapping
+        @Transactional
+        public List<UserDto> list(String userName) {
         if (userName == null) {
             List<User> users = userRepository.findAll();
             return UserDto.converter(users);
@@ -60,18 +63,18 @@ public class UserController {
      * @return
      * @author: Luis Gregorio
      */
+        @PostMapping
+        @Transactional
+        public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder){
+            User user = userForm.convertToUser(userRepository);
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder){
-        User user = userForm.convertToUser(userRepository);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userRepository.save(user);
-        URI uri = uriBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+
+            userRepository.save(user);
+            URI uri = uriBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(new UserDto(user));
-
     }
 
     /**
@@ -80,17 +83,14 @@ public class UserController {
      * @return
      * @author: Luis Gregorio
      */
-
-    @GetMapping("/{id}")
-    @Transactional
-    public ResponseEntity<UserDto> details(@PathVariable Long id) {
-        Optional<User> user = userRepository.findById(id);
+        @GetMapping("/{id}")
+        @Transactional
+        public ResponseEntity<UserDto> details(@PathVariable Long id) {
+            Optional<User> user = userRepository.findById(id);
         if(user.isPresent()) {
             return ResponseEntity.ok(new UserDto(user.get()));
         }
-
         return ResponseEntity.notFound().build();
-
     }
 
     /**
@@ -100,20 +100,19 @@ public class UserController {
      * @return
      * @author: Luis Gregorio
      */
-
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormUpdate userFormUpdate) {
-        Optional<User> opt = userRepository.findById(id);
+        @PutMapping("/{id}")
+        @Transactional
+        public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormUpdate userFormUpdate) {
+            Optional<User> opt = userRepository.findById(id);
         if(opt.isPresent()) {
+
             User user = userFormUpdate.update(id, userRepository);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
+
             return ResponseEntity.ok(new UserDto(user));
-
         }
-
         return ResponseEntity.notFound().build();
     }
 
@@ -123,11 +122,10 @@ public class UserController {
      * @return
      * @author: Luis Gregorio
      */
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<User> opt = userRepository.findById(id);
+        @DeleteMapping("/{id}")
+        @Transactional
+        public ResponseEntity<?> delete(@PathVariable Long id) {
+            Optional<User> opt = userRepository.findById(id);
         if(opt.isPresent()) {
             userRepository.deleteById(id);
             return ResponseEntity.ok().build();

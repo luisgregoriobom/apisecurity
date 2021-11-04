@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Created by Luis Gregorio.
+ * Class validates user email and password with database.
+ */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthenticationService implements UserDetailsService {
@@ -29,7 +33,6 @@ public class AuthenticationService implements UserDetailsService {
      * @throws UsernameNotFoundException
      * @author: Luis Gregorio
      */
-
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Optional<User> user = repository.findByEmail(name);
@@ -41,6 +44,5 @@ public class AuthenticationService implements UserDetailsService {
             return restaurant.get();
         }
         throw new UsernameNotFoundException("Dados Inválidos");
-
     }
 }

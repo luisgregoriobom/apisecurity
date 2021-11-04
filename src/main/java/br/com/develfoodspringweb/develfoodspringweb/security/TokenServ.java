@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * Created by Luis Gregorio.
+ * This class is responsible for taking the database,
+ * authentication and generating a token for the registered user.
+ */
 @Service
 public class TokenServ {
 
@@ -28,7 +33,6 @@ public class TokenServ {
      * @return
      * @author: Luis Gregorio
      */
-
     public String generateToken(Authentication authentication) {
 
         Object resultadoAuthentication = authentication.getPrincipal();
@@ -65,7 +69,6 @@ public class TokenServ {
      * @return
      * @author: Luis Gregorio
      */
-
     public boolean isTokenValid(String token) {
         try {
             Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
@@ -81,7 +84,6 @@ public class TokenServ {
      * @return
      * @author: Luis Gregorio
      */
-
     public Long getIdUser(String token) {
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
@@ -93,7 +95,6 @@ public class TokenServ {
      * @return
      * @author: Luis Gregorio
      */
-
     public Long getIdRestaurant(String token) {
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
@@ -105,7 +106,6 @@ public class TokenServ {
      * @return
      * @author: Luis Gregorio
      */
-
     public String getUserType(String token) {
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
         return (String) claims.get("type");

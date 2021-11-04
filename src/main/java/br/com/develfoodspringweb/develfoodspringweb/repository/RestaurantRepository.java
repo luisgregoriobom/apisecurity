@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * Created by Luis Gregorio.
+ * Interface created to find e-mail and names of restaurants through the implemented methods.
+ */
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
@@ -17,7 +20,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
      * @return
      * @author: Luis Gregorio
      */
-
     List<Restaurant> findByName(String restaurantName);
 
     /**
@@ -27,5 +29,4 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
      * @author: Luis Gregorio
      */
     Optional<Restaurant> findByEmail(String email);
-
 }

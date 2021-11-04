@@ -15,12 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Created by Luis Gregorio.
+ * class will intercept token request to grant user access.
+ */
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     private TokenServ tokenServs;
     private UserRepository userRepository;
     private RestaurantRepository restaurantRepository;
-
 
     public AuthenticationTokenFilter(TokenServ tokenServs, UserRepository userRepository, RestaurantRepository restaurantRepository) {
         this.tokenServs = tokenServs;
@@ -29,7 +32,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     }
 
     /**
-     * Authentication by Token, class will intercept token request to grant user access.
+     * Authentication by Token.
      * @param request
      * @param response
      * @param filterChain
@@ -37,7 +40,6 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
      * @throws IOException
      * @author: Luis Gregorio
      */
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -61,7 +63,6 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
      * @param token
      * @author: Luis Gregorio
      */
-
     private void authenticateCliente(String token) {
 
         Long idUser = tokenServs.getIdUser(token);
@@ -77,7 +78,6 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
      * @param token
      * @author: Luis Gregorio
      */
-
     private void authenticateRestaurant(String token){
         Long idRestaurant = tokenServs.getIdRestaurant(token);
         Restaurant restaurant = restaurantRepository.getById(idRestaurant);
@@ -92,7 +92,6 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
      * @return
      * @author: Luis Gregorio
      */
-
     private String recoveryToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if(token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
