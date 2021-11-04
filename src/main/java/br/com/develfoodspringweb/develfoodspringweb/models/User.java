@@ -60,6 +60,8 @@ public class User implements UserDetails {
      *user can have multiple Profiles, and Profile can be linked to multiple users.
      *
      * Implemented methods of the UserDetails interface
+     *
+     * @author: Luis Gregorio
      */
     @ManyToMany
     private List<Profile> userProfile = new ArrayList<>();

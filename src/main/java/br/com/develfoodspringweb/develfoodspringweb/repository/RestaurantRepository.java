@@ -9,6 +9,7 @@ import java.util.Optional;
 
 /**
  * Created by Luis Gregorio.
+ *
  * Interface created to find e-mail and names of restaurants through the implemented methods.
  */
 @Repository

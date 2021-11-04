@@ -17,6 +17,7 @@ import java.io.IOException;
 
 /**
  * Created by Luis Gregorio.
+ *
  * class will intercept token request to grant user access.
  */
 public class AuthenticationTokenFilter extends OncePerRequestFilter {

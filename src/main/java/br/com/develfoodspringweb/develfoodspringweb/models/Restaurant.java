@@ -74,6 +74,8 @@ public class Restaurant implements UserDetails {
      *restaurant can have multiple Profiles, and Profile can be linked to multiple Restaurants.
      *
      * Implemented methods of the UserDetails interface
+     *
+     * @author: Luis Gregorio
      */
     @ManyToMany
     private List<Profile> restaurantProfile = new ArrayList<>();

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Created by Luis Gregorio.
+ *
  * Class created to transfer more simplified token data.
  */
 @Data

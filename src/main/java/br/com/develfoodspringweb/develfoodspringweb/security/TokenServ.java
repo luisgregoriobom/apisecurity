@@ -14,6 +14,7 @@ import java.util.Date;
 
 /**
  * Created by Luis Gregorio.
+ *
  * This class is responsible for taking the database,
  * authentication and generating a token for the registered user.
  */

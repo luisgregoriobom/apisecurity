@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * Created by Luis Gregorio.
+ *
  * Class created to alert the user what needs to be filled in requests
  */
 @Data

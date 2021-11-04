@@ -29,6 +29,7 @@ import java.util.Optional;
 
 /**
  * Created by Luis Gregorio.
+ *
  * Class that performs the methods of listing, registering, detailing, updating and removing from a restaurant.
  */
 @Data

@@ -19,6 +19,7 @@ import javax.validation.Valid;
 
 /**
  * Created by Luis Gregorio.
+ * 
  * Class generated to implement the Controller that authenticates email and password.
  */
 @RestController

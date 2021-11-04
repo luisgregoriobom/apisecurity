@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Luis Gregorio.
+ *
  * In this class we have the intercept of any exception that may occur in the program.
  */
 @RestControllerAdvice

@@ -17,6 +17,7 @@ import java.util.Optional;
 
 /**
  * Created by Luis Gregorio.
+ *
  * Class validates user email and password with database.
  */
 @Service

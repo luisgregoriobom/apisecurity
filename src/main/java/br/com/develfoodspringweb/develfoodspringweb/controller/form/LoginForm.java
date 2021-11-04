@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 /**
  * Created by Luis Gregorio.
+ *
  * The class has the function of getting the user's email and password to authenticate.
  */
 @Data

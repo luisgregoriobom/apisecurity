@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Created by Luis Gregorio.
+ *
  * Class that configures authentication, authorization and endpoints
  */
 @EnableWebSecurity
