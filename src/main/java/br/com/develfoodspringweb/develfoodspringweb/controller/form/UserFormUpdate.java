@@ -18,6 +18,14 @@ public class UserFormUpdate {
     @NotNull @NotEmpty @Length(min = 11)
     private String phone;
 
+    /**
+     * Method to call User data update.
+     * @param id
+     * @param userRepository
+     * @return
+     * @author: Luis Gregorio
+     */
+
     public User update(Long id, UserRepository userRepository) {
         User user = userRepository.getById(id);
         user.setPassword(this.password);

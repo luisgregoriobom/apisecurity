@@ -20,18 +20,25 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ControllerAuthentication { //Controller que autentica email e senha no DB
+public class ControllerAuthentication {
 
     private final AuthenticationManager authManager;
 
     private final TokenServ tokenServ;
+
+    /**
+     * That Controller authenticates email and password in the DataBase and call the AuthenticationService class.
+     * @param form
+     * @return
+     * @author: Luis Gregorio
+     */
 
     @PostMapping
     public ResponseEntity<TokenDto> authenticate(@RequestBody @Valid LoginForm form) {
         UsernamePasswordAuthenticationToken loginInformation = form.converter();
 
         try {
-            Authentication authentication = authManager.authenticate(loginInformation); //chamar classe AuthenticationService
+            Authentication authentication = authManager.authenticate(loginInformation);
             String token = tokenServ.generateToken(authentication);
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         } catch (AuthenticationException e) {

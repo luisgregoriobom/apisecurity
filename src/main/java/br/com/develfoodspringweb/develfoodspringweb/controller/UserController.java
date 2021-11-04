@@ -34,6 +34,13 @@ public class UserController {
 
     private final UserRepository userRepository;
 
+    /**
+     * Method to list all database users.
+     * @param userName
+     * @return
+     * @author: Luis Gregorio
+     */
+
     @GetMapping
     @Transactional
     public List<UserDto> list(String userName) {
@@ -45,6 +52,14 @@ public class UserController {
             return UserDto.converter(users);
         }
     }
+
+    /**
+     * Method for registering a new user in the database.
+     * @param userForm
+     * @param uriBuilder
+     * @return
+     * @author: Luis Gregorio
+     */
 
     @PostMapping
     @Transactional
@@ -59,6 +74,13 @@ public class UserController {
 
     }
 
+    /**
+     *Method to detail information about a user that already exists in the database
+     * @param id
+     * @return
+     * @author: Luis Gregorio
+     */
+
     @GetMapping("/{id}")
     @Transactional
     public ResponseEntity<UserDto> details(@PathVariable Long id) {
@@ -70,6 +92,14 @@ public class UserController {
         return ResponseEntity.notFound().build();
 
     }
+
+    /**
+     * Method to update some information of a user exists in the database.
+     * @param id
+     * @param userFormUpdate
+     * @return
+     * @author: Luis Gregorio
+     */
 
     @PutMapping("/{id}")
     @Transactional
@@ -87,6 +117,13 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Method to delete a user from the database.
+     * @param id
+     * @return
+     * @author: Luis Gregorio
+     */
+
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -98,63 +135,3 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    /**
-//     * Function with GET method to do make a query with the name of the user as parameter.
-//     * @param nameUser
-//     * @return
-//     * @author: Thomas B.P.
-//     */
-//    @GetMapping
-//    public UserDto getUserByName(@RequestParam String nameUser){
-//        if(nameUser == null){
-//            return null;
-//        }
-//
-//        Optional<User> opt = userRepository.findByName(nameUser);
-//        if (!opt.isPresent()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-//                    "User name not found");
-//        }
-//         return UserDto.convertToUserDto(opt.get());
-//
-//    }
-////teste
-//    /**
-//     * Function with POST method to register new User while the function create the URI route and return the head HTTP location with the URL
-//     * @param userForm
-//     * @param uriBuilder
-//     * @return
-//     * @author: Thomas B.P.
-//     */
-//    @PostMapping
-//    public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
-//                                            UriComponentsBuilder uriBuilder){
-//       User user = userForm.convertToUser(userForm);
-//       userRepository.save(user);
-//
-//        URI uri = uriBuilder.
-//                path("/{id}").
-//                buildAndExpand(user.getId()).
-//                toUri();
-//
-//       return ResponseEntity.created(uri).body(new UserDto(user));
-//    }
-//
-//}

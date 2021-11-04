@@ -16,6 +16,14 @@ public class RestaurantFormUpdate {
     @NotNull @NotEmpty @Length(min = 11)
     private String phone;
 
+    /**
+     * Method to call Restaurant data update.
+     * @param id
+     * @param restaurantRepository
+     * @return
+     * @author: Luis Gregorio
+     */
+
     public Restaurant update(Long id, RestaurantRepository restaurantRepository) {
         Restaurant restaurant = restaurantRepository.getById(id);
         restaurant.setAddress(this.address);
