@@ -77,6 +77,13 @@ public class RestaurantController {
 
     }
 
+    /**
+     * Function to filter by the name and or food type of the restaurant and return a list of the search pageable
+     * @param filterForm
+     * @param pageable
+     * @return
+     * @author: Thomas B.P.
+     */
     @PostMapping("/filter")
     public ResponseEntity<List<RestaurantDto>> filter(@RequestBody  FilterForm filterForm,
                                                       Pageable pageable){
