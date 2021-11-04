@@ -11,7 +11,20 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 
+    /**
+     * Function to search for a user by name.
+     * @param userName
+     * @return
+     * @author: Luis Gregorio
+     */
+
     List<User> findByName(String userName);
 
-    Optional<User> findByEmail(String email); //Fazer consulta de autenticação pelo Email em AuthenticationService!
-}
+    /**
+     * Function to search for a user by email.
+     * @param email
+     * @return
+     * @author: Luis Gregorio
+     */
+
+    Optional<User> findByEmail(String email);
