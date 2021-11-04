@@ -28,7 +28,7 @@ public class PlateController {
     private final RestaurantNameRepository restaurantNameRepository;
 
     @GetMapping
-    public List<PlateDto> list(String restaurantName) {
+    public List<PlateDto> list(@RequestBody String restaurantName) {
         if (restaurantName == null) {
             List<Plate> plates = plateRepository.findAll();
             return PlateDto.convert(plates);
@@ -53,8 +53,8 @@ public class PlateController {
         if (plate.isPresent()) {
             return ResponseEntity.ok(new PlateDto(plate.get()));
         }
-
         return ResponseEntity.notFound().build();
+
     }
 
     @PutMapping("/{id}")
@@ -65,6 +65,7 @@ public class PlateController {
             Plate plate = form.update(id, plateRepository);
             return ResponseEntity.ok(new PlateDto(plate));
         }
+
         return ResponseEntity.notFound().build();
     }
 

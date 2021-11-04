@@ -4,6 +4,6 @@ INSERT INTO restaurants(name, cnpj, login, password, email, address, phone) VALU
 
 
 
-INSERT INTO plates(category, name, obs, price) VALUES('SWEET', 'Torta de Morango Moreno', 'Torta de chocolate com recheio de creme de morango', '45.00');
+INSERT INTO plates(category, name, obs, price, restaurant_id) VALUES('SWEET', 'Torta de Morango Moreno', 'Torta de chocolate com recheio de creme de morango', '45.00', '1');
 INSERT INTO plates(category, name, obs, price) VALUES('SAVORY', 'Pizza Marguerita GG', 'Pizza Clássica de 16 Fatias com Queijo, Tomate e Manjericão DELICINHA', '70.00');
 

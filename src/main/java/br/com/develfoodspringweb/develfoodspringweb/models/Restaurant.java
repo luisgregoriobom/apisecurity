@@ -1,6 +1,7 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class Restaurant {
     private String phone;
 
     @OneToMany(mappedBy = "restaurant")
+    @JsonIgnore
     private List<Plate> plate;
 
 

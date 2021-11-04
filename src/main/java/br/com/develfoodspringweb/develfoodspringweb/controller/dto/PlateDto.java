@@ -17,7 +17,8 @@ public class PlateDto {
     private String obs;
     private BigDecimal price;
     private Enum category;
-    private Restaurant restaurant;
+    private String restaurantName;
+    private Long restaurantId;
 
 
     public PlateDto(Plate plate) {
@@ -26,7 +27,8 @@ public class PlateDto {
         this.obs = plate.getObs();
         this.price = plate.getPrice();
         this.category = plate.getCategory();
-        this.restaurant = plate.getRestaurant();
+        this.restaurantName = plate.getRestaurant().getName(); //mostrar nome e id no body do json
+        this.restaurantId = plate.getRestaurant().getId();
     }
 
     /**

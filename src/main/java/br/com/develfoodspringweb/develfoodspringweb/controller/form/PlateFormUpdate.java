@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 @Data
 public class PlateFormUpdate {
 
+    //classe com atributos que posso atualizar no prato pelo PUT
+
     @NotEmpty @NotNull @Length(min = 5)
     private String name;
     @NotEmpty @NotNull @Length(min = 10)
