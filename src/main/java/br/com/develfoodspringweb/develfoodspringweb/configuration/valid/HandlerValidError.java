@@ -35,4 +35,8 @@ public class HandlerValidError {
         return dto;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6d6d8c708e61ac6428f3688e8e0ab11cbcf8e097
