@@ -34,7 +34,7 @@ public class UserController {
      * @author: Thomas B.P.
      */
     @GetMapping
-    public UserDto getUserByName(@RequestParam String nameUser){
+    public ResponseEntity<UserDto> getUserByName(@RequestParam String nameUser){
         if(nameUser == null){
             return null;
         }
@@ -44,7 +44,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "User name not found");
         }
-         return queryByName;
+         return new ResponseEntity<>(queryByName, HttpStatus.OK);
 
     }
 

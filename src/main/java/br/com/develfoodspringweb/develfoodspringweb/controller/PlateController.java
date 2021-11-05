@@ -32,7 +32,7 @@ public class PlateController {
      * @author: Thomas B.P.
      */
     @GetMapping
-    public PlateDto getPlateByName(@RequestParam String namePlate){
+    public ResponseEntity<PlateDto> getPlateByName(@RequestParam String namePlate){
         if(namePlate == null){
             return null;
         }
@@ -42,7 +42,7 @@ public class PlateController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Plate name not found");
         }
-        return queryByName;
+        return new ResponseEntity<>(queryByName, HttpStatus.OK);
 
     }
 

@@ -42,7 +42,7 @@ public class RestaurantController {
      * @author: Thomas B.P.
      */
     @GetMapping
-    public RestaurantDto getRestaurantByName(@RequestParam String nameRestaurant){
+    public ResponseEntity<RestaurantDto> getRestaurantByName(@RequestParam String nameRestaurant){
         if(nameRestaurant == null){
             return null;
         }
@@ -52,7 +52,7 @@ public class RestaurantController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Restaurant name not found");
         }
-        return queryByName;
+        return  new ResponseEntity<>(queryByName, HttpStatus.OK);
     }
 
     /**
