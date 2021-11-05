@@ -7,11 +7,27 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by Luis Gregorio.
+ *
+ * Interface created to find e-mail and names of users through the implemented methods.
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-
+    /**
+     * Function to search for a user by name.
+     * @param userName
+     * @return
+     * @author: Luis Gregorio
+     */
     List<User> findByName(String userName);
 
-    Optional<User> findByEmail(String email); //Fazer consulta de autenticação pelo Email em AuthenticationService!
+    /**
+     * Function to search for a user by email.
+     * @param email
+     * @return
+     * @author: Luis Gregorio
+     */
+    Optional<User> findByEmail(String email);
 }
