@@ -26,7 +26,7 @@ import java.util.Optional;
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
-@RequestMapping("/api/restaurant/plate")
+@RequestMapping("/api/plate")
 public class PlateController {
 
     private final PlateRepository plateRepository;

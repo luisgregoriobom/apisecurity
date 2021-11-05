@@ -1,6 +1,8 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
+import br.com.develfoodspringweb.develfoodspringweb.models.Category;
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
+import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -25,7 +27,7 @@ public class PlateDto {
         this.obs = plate.getObs();
         this.price = plate.getPrice();
         this.category = plate.getCategory();
-        this.restaurantName = plate.getRestaurant().getName(); //mostrar nome e id no body do json
+        this.restaurantName = plate.getRestaurant().getName();
         this.restaurantId = plate.getRestaurant().getId();
     }
 

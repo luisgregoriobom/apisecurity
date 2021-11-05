@@ -33,6 +33,4 @@ public class PlateFormUpdate {
 
         return plate;
     }
-
-
 }

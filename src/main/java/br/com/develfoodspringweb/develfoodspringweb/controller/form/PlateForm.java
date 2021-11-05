@@ -33,6 +33,7 @@ public class PlateForm {
      * @param restaurantNameRepository
      * @return
      * @author: Thomas B.P.
+     * @author: Luis Gregorio
      */
     public Plate convert(RestaurantNameRepository restaurantNameRepository) {
         Optional<Restaurant> restaurant = restaurantNameRepository.findById(restaurantId);
