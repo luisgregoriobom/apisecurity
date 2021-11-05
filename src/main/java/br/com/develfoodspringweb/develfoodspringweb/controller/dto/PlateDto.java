@@ -1,10 +1,9 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
-import br.com.develfoodspringweb.develfoodspringweb.models.Category;
-import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
-import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
-import lombok.Data;
 
+import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
+import lombok.Data;
+import java.lang.Long;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,6 @@ public class PlateDto {
     private Enum category;
     private String restaurantName;
     private Long restaurantId;
-
 
     public PlateDto(Plate plate) {
         this.id = plate.getId();

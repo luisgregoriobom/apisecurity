@@ -39,7 +39,7 @@ public class PlateController {
      * @author: Luis Gregorio
      */
     @GetMapping
-    public List<PlateDto> list(@RequestBody String restaurantName) {
+    public List<PlateDto> list(String restaurantName) {
         if (restaurantName == null) {
             List<Plate> plates = plateRepository.findAll();
             return PlateDto.convert(plates);
@@ -78,7 +78,6 @@ public class PlateController {
             return ResponseEntity.ok(new PlateDto(plate.get()));
         }
         return ResponseEntity.notFound().build();
-
     }
 
     /**

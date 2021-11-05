@@ -6,7 +6,7 @@ import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantNameRepository;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-
+import java.lang.Long;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -43,5 +43,4 @@ public class PlateForm {
         }
     return new Plate(name, obs, price, category, newRestaurant);
     }
-
 }
