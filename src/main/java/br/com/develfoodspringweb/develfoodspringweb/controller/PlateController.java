@@ -19,14 +19,25 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by Luis Gregorio.
+ *
+ * Class that performs the methods of listing, registering, detailing, updating and removing from a plates.
+ */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
-@RequestMapping("/api/plate") //depois do merge com todos os projetos, realizar a troca do endpoint /api/restaurant/plate...
+@RequestMapping("/api/restaurant/plate")
 public class PlateController {
 
     private final PlateRepository plateRepository;
     private final RestaurantNameRepository restaurantNameRepository;
 
+    /**
+     * Method to list all database plates
+     * @param restaurantName
+     * @return
+     * @author: Luis Gregorio
+     */
     @GetMapping
     public List<PlateDto> list(@RequestBody String restaurantName) {
         if (restaurantName == null) {
@@ -38,6 +49,13 @@ public class PlateController {
         }
     }
 
+    /**
+     * Method to register a new plate in the database.
+     * @param form
+     * @param uriBuilder
+     * @return
+     * @author: Luis Gregorio
+     */
     @PostMapping
     public ResponseEntity<PlateDto> register(@RequestBody @Valid PlateForm form, UriComponentsBuilder uriBuilder) {
         Plate plate = form.convert(restaurantNameRepository);
@@ -46,6 +64,12 @@ public class PlateController {
         return ResponseEntity.created(uri).body(new PlateDto(plate));
     }
 
+    /**
+     * Method to detail an already registered plate.
+     * @param id
+     * @return
+     * @author: Luis Gregorio
+     */
     @GetMapping("/{id}")
     @Transactional
     public ResponseEntity<PlateDto> details(@PathVariable Long id) {
@@ -57,6 +81,13 @@ public class PlateController {
 
     }
 
+    /**
+     * Method for updating the data of an already registered plate.
+     * @param id
+     * @param form
+     * @return
+     * @author: Luis Gregorio
+     */
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<PlateDto> update(@PathVariable Long id, @RequestBody @Valid PlateFormUpdate form) {
@@ -69,6 +100,12 @@ public class PlateController {
         return ResponseEntity.notFound().build();
     }
 
+    /**
+     * Method to delete a plate from the database.
+     * @param id
+     * @return
+     * @author: Luis Gregorio
+     */
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> remove(@PathVariable Long id){

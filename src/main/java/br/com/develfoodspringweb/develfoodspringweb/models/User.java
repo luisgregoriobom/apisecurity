@@ -52,14 +52,14 @@ public class User implements UserDetails {
     }
 
     /**
-     * Permission methods for user access to authenticate in the system
+     * Permission methods for user access to authenticate in the system.
      * For SpringSecurity, in addition to the User, we need to have a class to represent,
      *the profile related to User permissions.
      *
      * Profile is an entity, there must be Cardinality from User to Profile,
      *user can have multiple Profiles, and Profile can be linked to multiple users.
      *
-     * Implemented methods of the UserDetails interface
+     * Implemented override methods of the UserDetails interface.
      *
      * @author: Luis Gregorio
      */

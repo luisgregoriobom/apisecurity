@@ -5,10 +5,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
+/**
+ * Created by Luis Gregorio.
+ *
+ * Interface created to find e-mail and names of restaurants through the implemented methods.
+ */
 public interface RestaurantNameRepository extends JpaRepository<Restaurant, Long> {
 
-    //classe para buscar a entidade Restaurante como String
-
+    /**
+     * Function to convert Resdtaurant object for search names with id
+     * @param id
+     * @return
+     */
     Optional<Restaurant> findById(Long id);
 }
 

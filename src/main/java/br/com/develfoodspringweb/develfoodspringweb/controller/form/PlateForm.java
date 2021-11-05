@@ -34,10 +34,6 @@ public class PlateForm {
      * @return
      * @author: Thomas B.P.
      */
-
-    //interface NameRestaurantRepository para buscar o nome do restaurante
-    // sem que atrele a busca a sua entidade, e sim somente ao seu nome.
-
     public Plate convert(RestaurantNameRepository restaurantNameRepository) {
         Optional<Restaurant> restaurant = restaurantNameRepository.findById(restaurantId);
         var newRestaurant = new Restaurant();

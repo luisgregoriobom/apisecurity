@@ -10,10 +10,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+/**
+ * Created by Luis Gregorio.
+ *
+ * In this class we can define what data a plate can update in the system.
+ */
 @Data
 public class PlateFormUpdate {
-
-    //classe com atributos que posso atualizar no prato pelo PUT
 
     @NotEmpty @NotNull @Length(min = 5)
     private String name;
