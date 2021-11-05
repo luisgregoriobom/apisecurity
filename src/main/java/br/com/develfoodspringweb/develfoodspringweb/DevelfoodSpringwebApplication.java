@@ -1,32 +1,18 @@
 package br.com.develfoodspringweb.develfoodspringweb;
 
-import br.com.develfoodspringweb.develfoodspringweb.configuration.InitialConfig;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-public class DevelfoodSpringwebApplication implements CommandLineRunner {
+public class DevelfoodSpringwebApplication {
 
-	@Autowired
-	private InitialConfig initialConfig;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DevelfoodSpringwebApplication.class, args);
-
-	}
-
-	/**
-	 * Method to manually add data into the database
-	 * @param args
-	 * @throws Exception
-	 * @author: Thomas B.P.
-	 */
-	@Override
-	public void run(String... args) throws Exception {
-		initialConfig.configurar();
 
 	}
 

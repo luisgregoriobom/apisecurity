@@ -1,19 +1,25 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> 6d6d8c708e61ac6428f3688e8e0ab11cbcf8e097
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.catalina.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
 @Data
 @NoArgsConstructor
-public class Restaurant {
+public class Restaurant implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +34,7 @@ public class Restaurant {
     private String foodType;
 
     @OneToMany(mappedBy = "restaurant")
+    @JsonIgnore
     private List<Plate> plate;
 
 
@@ -46,8 +53,10 @@ public class Restaurant {
     public Restaurant(RestaurantForm restaurantForm){
         this.name = restaurantForm.getName();
         this.cnpj = restaurantForm.getCnpj();
-        this.phone = restaurantForm.getPhone();
+        this.login = restaurantForm.getLogin();
+        this.email = restaurantForm.getEmail();
         this.address = restaurantForm.getAddress();
+        this.phone = restaurantForm.getPhone();
     }
 
     /**
@@ -63,6 +72,55 @@ public class Restaurant {
         this.foodType = foodType;
     }
 
+    /**
+     * Permission methods for user access to authenticate in the system
+     * For SpringSecurity, in addition to the Restaurant, we need to have a class to represent,
+     *the profile related to Restaurant permissions.
+     *
+     * Profile is an entity, there must be Cardinality from Restaurant to Profile,
+     *restaurant can have multiple Profiles, and Profile can be linked to multiple Restaurants.
+     *
+     * Implemented methods of the UserDetails interface
+     *
+     * @author: Luis Gregorio
+     */
+    @ManyToMany
+    private List<Profile> restaurantProfile = new ArrayList<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.restaurantProfile;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
 
 

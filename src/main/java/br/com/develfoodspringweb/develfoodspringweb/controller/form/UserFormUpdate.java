@@ -8,32 +8,33 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Created by Luis Gregorio.
+ *
+ * In this class we can define what data a user can update in the system.
+ */
 @Data
-public class UserForm {
+public class UserFormUpdate {
 
-    @NotEmpty @NotNull @Length(min = 5)
-    private String name;
-    @NotNull @NotEmpty @Length(min = 11)
-    private String cpf;
-    @NotNull @NotEmpty @Length(min = 5)
-    private String login;
     @NotNull @NotEmpty @Length(min = 5)
     private String password;
-    @NotNull @NotEmpty @Length(min = 5)
-    private String email;
     @NotNull @NotEmpty @Length(min = 5)
     private String address;
     @NotNull @NotEmpty @Length(min = 11)
     private String phone;
 
     /**
-     * Function to convert the object Form Class received into a Model Object
+     * Method to call User data update.
+     * @param id
      * @param userRepository
      * @return
-     * @author: Thomas B.P.
+     * @author: Luis Gregorio
      */
-    public User convertToUser(UserRepository userRepository){
-        return new User(name, cpf, login, password, email, address, phone);
+    public User update(Long id, UserRepository userRepository) {
+        User user = userRepository.getById(id);
+        user.setPassword(this.password);
+        user.setAddress(this.address);
+        user.setPhone(this.phone);
+        return user;
     }
-
 }
