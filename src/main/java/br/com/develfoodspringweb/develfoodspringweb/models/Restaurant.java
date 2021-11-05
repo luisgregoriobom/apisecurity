@@ -1,7 +1,11 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+=======
+import com.fasterxml.jackson.annotation.JsonIgnore;
+>>>>>>> 6d6d8c708e61ac6428f3688e8e0ab11cbcf8e097
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.User;
@@ -31,6 +35,7 @@ public class Restaurant implements UserDetails {
     private String phone;
 
     @OneToMany(mappedBy = "restaurant")
+    @JsonIgnore
     private List<Plate> plate;
 
 
