@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+
 import java.util.Optional;
 
 @Service
@@ -39,10 +41,12 @@ public class UserService {
     public UserDto register(UserForm userForm){
         User user = userForm.convertToUser(userForm);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        String encodedPassword = passwordEncoder.encode(userForm.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
-
+        if (user.getId() == null){
+            return null;
+        }
         return new UserDto(user);
     }
 }

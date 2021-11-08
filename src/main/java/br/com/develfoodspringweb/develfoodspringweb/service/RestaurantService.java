@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,12 +48,15 @@ public class RestaurantService {
      * @author: Thomas B.P.
      */
     public RestaurantDto register (RestaurantForm restaurantForm){
+
         Restaurant restaurant = restaurantForm.convertToRestaurant(restaurantForm);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(restaurant.getPassword());
+        String encodedPassword = passwordEncoder.encode(restaurantForm.getPassword());
         restaurant.setPassword(encodedPassword);
         restaurantRepository.save(restaurant);
-
+        if (restaurant.getId() == null){
+            return null;
+        }
         return new RestaurantDto(restaurant);
     }
 

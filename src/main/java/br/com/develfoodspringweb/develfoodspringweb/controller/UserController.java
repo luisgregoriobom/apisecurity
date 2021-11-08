@@ -70,9 +70,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
                                             UriComponentsBuilder uriBuilder){
+
         UserDto userToRegister = userService.register(userForm);
-
-
+        if (userToRegister == null){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "User not created.");
+        }
 
         URI uri = uriBuilder
                 .path("/api/user/{id}")

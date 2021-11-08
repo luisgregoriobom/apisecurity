@@ -64,6 +64,9 @@ public class RestaurantController {
                                                   UriComponentsBuilder uriComponentsBuilder){
 
         RestaurantDto restaurantToRegister = restaurantService.register(restaurantForm);
+        if (restaurantToRegister == null){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Restaurant not created.");
+        }
 
         URI uri = uriComponentsBuilder
                 .path("{id}")

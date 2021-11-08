@@ -31,6 +31,20 @@ public class RestaurantForm {
 
     private List<Plate> plates;
 
+    public RestaurantForm() {
+    }
+
+    public RestaurantForm(Restaurant restaurant){
+        this.name = restaurant.getName();
+        this.cnpj = restaurant.getCnpj();
+        this.login = restaurant.getLogin();
+        this.password = restaurant.getPassword();
+        this.email = restaurant.getEmail();
+        this.address = restaurant.getAddress();
+        this.phone = restaurant.getPhone();
+
+    }
+
     /**
      * Function to convert the object Form Class received into a Model Object
      * @param restaurantForm
