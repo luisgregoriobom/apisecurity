@@ -79,7 +79,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().sameOrigin()
                 .and().csrf().disable().cors()
-                .and().csrf().disable()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationTokenFilter(tokenService, userRepository, restaurantRepository), UsernamePasswordAuthenticationFilter.class);
     }
