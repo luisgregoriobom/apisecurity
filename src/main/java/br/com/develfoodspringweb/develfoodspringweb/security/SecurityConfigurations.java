@@ -68,8 +68,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/api/user").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/user/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/restaurant").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/restaurant").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/restaurant/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/plate").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/plate/*").permitAll()
