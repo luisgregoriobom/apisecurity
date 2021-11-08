@@ -33,11 +33,11 @@ import java.util.Optional;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserService userService;
+
     private final UserRepository userRepository;
+
+    private final UserService userService;
+
 
     /**
      * Function with GET method to do make a query with the name of the user as parameter.
@@ -72,9 +72,7 @@ public class UserController {
                                             UriComponentsBuilder uriBuilder){
         UserDto userToRegister = userService.register(userForm);
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+
 
         URI uri = uriBuilder
                 .path("/api/user/{id}")

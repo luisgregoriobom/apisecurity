@@ -31,6 +31,8 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<UserRequest> userRequest;
+    @OneToMany(mappedBy = "user")
+    private List<Profile> userProfile = new ArrayList<>();
 
     public User(String name, String cpf, String login, String password, String email, String address, String phone) {
         this.name = name;
@@ -63,8 +65,6 @@ public class User implements UserDetails {
      *
      * @author: Luis Gregorio
      */
-    @ManyToMany
-    private List<Profile> userProfile = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,11 +74,6 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
     }
 
     @Override

@@ -2,6 +2,7 @@ package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
+import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,8 @@ public class RestaurantDto {
      * @return
      * @author: Thomas B.P.
      */
-
-    public static List<RestaurantDto> convertToRestaurantDto(List<Restaurant> restaurant){
-        return restaurant.stream().map(RestaurantDto::new).collect(Collectors.toList());
+    public static RestaurantDto convertToRestaurantDto(Restaurant restaurant){
+        return new RestaurantDto(restaurant);
     }
-
 
 }

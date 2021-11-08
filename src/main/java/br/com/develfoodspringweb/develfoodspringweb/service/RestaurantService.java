@@ -5,26 +5,25 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.FilterForm;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RestaurantService {
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
     /**
      * Function that make a query with the name of the restaurant as parameter and check in the database if the name is present
@@ -48,6 +47,9 @@ public class RestaurantService {
      */
     public RestaurantDto register (RestaurantForm restaurantForm){
         Restaurant restaurant = restaurantForm.convertToRestaurant(restaurantForm);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(restaurant.getPassword());
+        restaurant.setPassword(encodedPassword);
         restaurantRepository.save(restaurant);
 
         return new RestaurantDto(restaurant);

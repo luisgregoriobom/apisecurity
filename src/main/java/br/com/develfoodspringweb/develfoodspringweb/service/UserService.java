@@ -4,16 +4,17 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     /**
      * Function that make a query with the name of the user as parameter and check in the database if the name is present
@@ -37,6 +38,9 @@ public class UserService {
      */
     public UserDto register(UserForm userForm){
         User user = userForm.convertToUser(userForm);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userRepository.save(user);
 
         return new UserDto(user);

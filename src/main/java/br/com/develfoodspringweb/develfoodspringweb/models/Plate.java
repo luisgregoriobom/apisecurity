@@ -32,4 +32,10 @@ public class Plate {
         this.category = category;
         this.restaurant = restaurant;
     }
+
+    public Plate(PlateForm plateForm){
+        this.name = plateForm.getName();
+        this.obs = plateForm.getObs();
+        this.price = plateForm.getPrice();
+    }
 }

@@ -3,48 +3,34 @@ package br.com.develfoodspringweb.develfoodspringweb.controller;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.dto.RestaurantDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.FilterForm;
-import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantFormUpdate;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import br.com.develfoodspringweb.develfoodspringweb.service.RestaurantService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/restaurant")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RestaurantController {
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-    @Autowired
-    private RestaurantService restaurantService;
+    private final RestaurantRepository restaurantRepository;
+
+    private final RestaurantService restaurantService;
 
     /**
      * Function with GET method to do make a query with the name of the restaurant as parameter.
@@ -58,7 +44,6 @@ public class RestaurantController {
         if(nameRestaurant == null){
             return null;
         }
-
         RestaurantDto queryByName = restaurantService.getRestaurantByName(nameRestaurant);
         if (queryByName == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -80,17 +65,12 @@ public class RestaurantController {
 
         RestaurantDto restaurantToRegister = restaurantService.register(restaurantForm);
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(restaurant.getPassword());
-        restaurant.setPassword(encodedPassword);
-
         URI uri = uriComponentsBuilder
                 .path("{id}")
                 .buildAndExpand(restaurantToRegister.getId())
                 .toUri();
 
         return ResponseEntity.created(uri).body(restaurantToRegister);
-
     }
 
     /**
@@ -109,8 +89,6 @@ public class RestaurantController {
 
     }
 
-}
-
     /**
      * Method to detail an already registered restaurant.
      * @param id
@@ -118,7 +96,7 @@ public class RestaurantController {
      * @author: Luis Gregorio
      */
     @GetMapping("/{id}")
-    @javax.transaction.Transactional
+    @Transactional
     public ResponseEntity<RestaurantDto> details(@PathVariable Long id) {
         Optional<Restaurant> restaurant = restaurantRepository.findById(id);
         if(restaurant.isPresent()) {
@@ -135,7 +113,7 @@ public class RestaurantController {
      * @author: Luis Gregorio
      */
     @PutMapping("/{id}")
-    @javax.transaction.Transactional
+    @Transactional
     public ResponseEntity<RestaurantDto> update(@PathVariable Long id, @RequestBody @Valid RestaurantFormUpdate form){
         Optional<Restaurant> opt = restaurantRepository.findById(id);
         if(opt.isPresent()) {
@@ -154,14 +132,14 @@ public class RestaurantController {
      * @return
      * @author: Luis Gregorio
      */
-        @DeleteMapping("/{id}")
-        @Transactional
-        public ResponseEntity<?> remove(@PathVariable Long id){
-            Optional<Restaurant> opt = restaurantRepository.findById(id);
-            if(opt.isPresent()) {
-                restaurantRepository.deleteById(id);
-                return ResponseEntity.ok().build();
-            }
-            return ResponseEntity.notFound().build();
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> remove(@PathVariable Long id){
+        Optional<Restaurant> opt = restaurantRepository.findById(id);
+        if(opt.isPresent()) {
+            restaurantRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
         }
 }

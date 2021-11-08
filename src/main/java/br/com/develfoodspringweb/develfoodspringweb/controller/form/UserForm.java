@@ -32,7 +32,7 @@ public class UserForm {
      * @return
      * @author: Thomas B.P.
      */
-    public User convertToUser(UserRepository userRepository){
+    public User convertToUser(UserForm userForm){
         return new User(name, cpf, login, password, email, address, phone);
     }
 

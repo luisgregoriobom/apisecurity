@@ -6,18 +6,18 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateFormUpd
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
 import br.com.develfoodspringweb.develfoodspringweb.repository.PlateRepository;
 import br.com.develfoodspringweb.develfoodspringweb.service.PlateService;
-import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantNameRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -25,12 +25,11 @@ import java.util.Optional;
 @RequestMapping("/api/plate") //depois do merge com todos os projetos, realizar a troca do endpoint /api/restaurant/plate...
 public class PlateController {
 
-    @Autowired
-    private PlateRepository plateRepository;
-    @Autowired
-    private PlateService plateService;
-    @Autowired
-    private final RestaurantNameRepository restaurantNameRepository;
+    private final PlateRepository plateRepository;
+
+    private final PlateService plateService;
+
+    private final RestaurantRepository restaurantRepository;
 
     /**
      * Function with GET method to do make a query with the name of the plate as parameter.
@@ -43,7 +42,6 @@ public class PlateController {
         if(namePlate == null){
             return null;
         }
-
         PlateDto queryByName = plateService.getPlateByName(namePlate);
         if (queryByName == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,

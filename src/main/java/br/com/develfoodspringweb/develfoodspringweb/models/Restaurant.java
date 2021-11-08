@@ -1,9 +1,7 @@
 package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIgnore;
->>>>>>> 6d6d8c708e61ac6428f3688e8e0ab11cbcf8e097
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.User;
@@ -33,9 +31,10 @@ public class Restaurant implements UserDetails {
     private String phone;
     private String foodType;
 
-    @OneToMany(mappedBy = "restaurant")
-    @JsonIgnore
+    @OneToMany(mappedBy = "restaurant") @JsonIgnore
     private List<Plate> plate;
+    @OneToMany(mappedBy = "restaurant")
+    private List<Profile> restaurantProfile = new ArrayList<>();
 
 
     public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, String foodType, List plate) {
@@ -84,8 +83,6 @@ public class Restaurant implements UserDetails {
      *
      * @author: Luis Gregorio
      */
-    @ManyToMany
-    private List<Profile> restaurantProfile = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -95,11 +92,6 @@ public class Restaurant implements UserDetails {
     @Override
     public String getUsername() {
         return this.email;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
     }
 
     @Override

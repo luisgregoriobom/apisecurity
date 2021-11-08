@@ -7,6 +7,9 @@ import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Component
 public class InitialConfig {
 
@@ -24,9 +27,9 @@ public class InitialConfig {
      */
     public void configurar(){
 
-        Restaurant restaurant = new Restaurant("testName03", "testCnpj03", "testPhone03", "testFoodType03");
+        Restaurant restaurant = new Restaurant("testName03", "testCnpj03", "testPhone03", "testFootType03");
         restaurantRepository.save(restaurant);
-
+//        new ArrayList<>(Arrays.asList("testeFoodtype03", "testeFoodTypeList04"))
     }
 
 }

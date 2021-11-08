@@ -27,7 +27,7 @@ public class PlateDto {
         this.obs = plate.getObs();
         this.price = plate.getPrice();
         this.category = plate.getCategory();
-        this.restaurantName = plate.getRestaurant().getName(); //mostrar nome e id no body do json
+        this.restaurantName = plate.getRestaurant().getName();
         this.restaurantId = plate.getRestaurant().getId();
     }
 
@@ -37,12 +37,7 @@ public class PlateDto {
      * @return
      * @author: Thomas B.P.
      */
-//    public static PlateDto convertToPlateDto(Plate plates){
-//        return new PlateDto(plates);
-//    }
-
-    //conversao de plateodto para lista de platedto
-    public static List<PlateDto> convert(List<Plate> plates) {
-        return plates.stream().map(PlateDto::new).collect(Collectors.toList());
+    public static PlateDto convertToPlateDto(Plate plates){
+        return new PlateDto(plates);
     }
 }

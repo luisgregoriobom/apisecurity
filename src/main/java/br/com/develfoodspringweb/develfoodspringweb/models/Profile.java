@@ -19,6 +19,8 @@ public class Profile implements GrantedAuthority {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private User user;
+    private Restaurant restaurant;
 
     /**
      * Returns a method over written attribute that has the name of the profile

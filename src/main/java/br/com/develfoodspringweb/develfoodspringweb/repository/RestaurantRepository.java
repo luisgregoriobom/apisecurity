@@ -18,7 +18,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
      * @return
      * @author: Luis Gregorio
      */
-    List<Restaurant> findByName(String restaurantName);
+    Optional<Restaurant> findByName(String restaurantName);
 
     public static Specification<Restaurant> filterByName(String name){
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name + "%");
@@ -35,4 +35,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
      * @author: Luis Gregorio
      */
     Optional<Restaurant> findByEmail(String email);
+
+    Optional<Restaurant> findById(Long id);
 }
