@@ -41,8 +41,13 @@ public class UserService {
     public UserDto register(UserForm userForm){
         User user = userForm.convertToUser(userForm);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(userForm.getPassword());
-        user.setPassword(encodedPassword);
+        try {
+            String encodedPassword = passwordEncoder.encode(userForm.getPassword());
+            user.setPassword(encodedPassword);
+        } catch (Exception e){
+            return null;
+        }
+
         userRepository.save(user);
         if (user.getId() == null){
             return null;

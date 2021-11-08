@@ -51,8 +51,13 @@ public class RestaurantService {
 
         Restaurant restaurant = restaurantForm.convertToRestaurant(restaurantForm);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(restaurantForm.getPassword());
-        restaurant.setPassword(encodedPassword);
+        try {
+            String encodedPassword = passwordEncoder.encode(restaurantForm.getPassword());
+            restaurant.setPassword(encodedPassword);
+        } catch (Exception e){
+            return null;
+        }
+
         restaurantRepository.save(restaurant);
         if (restaurant.getId() == null){
             return null;

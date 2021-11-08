@@ -67,6 +67,9 @@ public class RestaurantController {
         if (restaurantToRegister == null){
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Restaurant not created.");
         }
+        if (restaurantForm.getPassword() == null){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Error encrypting password.");
+        }
 
         URI uri = uriComponentsBuilder
                 .path("{id}")

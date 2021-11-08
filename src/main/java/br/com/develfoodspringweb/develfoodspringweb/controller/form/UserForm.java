@@ -33,7 +33,7 @@ public class UserForm {
      * @author: Thomas B.P.
      */
     public User convertToUser(UserForm userForm){
-        return new User(name, cpf, login, password, email, address, phone);
+        return new User(userForm);
     }
 
 }

@@ -75,6 +75,9 @@ public class UserController {
         if (userToRegister == null){
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "User not created.");
         }
+        if (userForm.getPassword() == null){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Error encrypting password.");
+        }
 
         URI uri = uriBuilder
                 .path("/api/user/{id}")
