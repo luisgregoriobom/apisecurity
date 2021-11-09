@@ -68,16 +68,21 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/api/user").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/user/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/restaurant").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/restaurant").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/restaurant/*").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/restaurant/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/plate").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/plate/*").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/auth").permitAll()
                 .antMatchers("/h2-console").permitAll()
                 .antMatchers("/h2-console/*").permitAll()
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().sameOrigin()
-                .and().csrf().disable()
+                .and().cors().and().csrf().disable().authorizeRequests()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationTokenFilter(tokenService, userRepository, restaurantRepository), UsernamePasswordAuthenticationFilter.class);
     }

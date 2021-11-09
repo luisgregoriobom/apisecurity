@@ -4,7 +4,6 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantFo
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

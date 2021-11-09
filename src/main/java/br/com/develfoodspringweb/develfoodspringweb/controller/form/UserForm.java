@@ -1,7 +1,6 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller.form;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
-import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 

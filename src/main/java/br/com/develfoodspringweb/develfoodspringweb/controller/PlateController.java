@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
-@RequestMapping("/api/plate") //depois do merge com todos os projetos, realizar a troca do endpoint /api/restaurant/plate...
+@RequestMapping("/api/plate")
 public class PlateController {
 
     private final PlateRepository plateRepository;
@@ -62,14 +62,14 @@ public class PlateController {
     public ResponseEntity<PlateDto> register(@RequestBody @Valid PlateForm plateForm,
                                              UriComponentsBuilder uriBuilder){
 
-       PlateDto plateToRegister = plateService.register(plateForm);
+        PlateDto plateToRegister = plateService.register(plateForm);
 
         URI uri = uriBuilder.
                 path("/api/plate/{id}").
                 buildAndExpand(plateToRegister.getId()).
                 toUri();
 
-       return ResponseEntity.created(uri).body(plateToRegister);
+        return ResponseEntity.created(uri).body(plateToRegister);
     }
 
     @GetMapping("/{id}")

@@ -3,7 +3,7 @@ package br.com.develfoodspringweb.develfoodspringweb.controller.dto;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.models.UserRequest;
 import lombok.Data;
-import org.springframework.data.domain.Page;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +37,7 @@ public class UserDto {
      * @return
      * @author: Thomas B.P.
      */
+
     public static UserDto convertToUserDto(User user) {
     return new UserDto(user);
     }

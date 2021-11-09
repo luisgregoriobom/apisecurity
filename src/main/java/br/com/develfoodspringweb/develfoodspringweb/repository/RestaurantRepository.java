@@ -20,10 +20,22 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, J
      */
     Optional<Restaurant> findByName(String restaurantName);
 
+    /**
+     * Query method to filter like the name of the restaurant
+     * @param name
+     * @return
+     * @author: Thomas B.P.
+     */
     public static Specification<Restaurant> filterByName(String name){
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name + "%");
     }
 
+    /**
+     * Query method to filter like the type of food one or more restaurant has
+     * @param foodType
+     * @return
+     * @author: Thomas B.P.
+     */
     public static Specification<Restaurant> filterByFoodType(String foodType){
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("foodType")), "%" + foodType + "%");
     }
