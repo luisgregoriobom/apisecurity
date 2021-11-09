@@ -4,6 +4,7 @@ import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
  *
  * In this class we can define what data a restaurant can update in the system.
  */
+@Data
 public class RestaurantFormUpdate {
 
     @NotNull @NotEmpty @Length(min = 5)

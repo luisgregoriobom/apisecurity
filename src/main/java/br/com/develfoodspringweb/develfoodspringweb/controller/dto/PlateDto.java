@@ -35,7 +35,9 @@ public class PlateDto {
      * @return
      * @author: Thomas B.P.
      */
-    public static List<PlateDto> convert(List<Plate> plates) {
-        return plates.stream().map(PlateDto::new).collect(Collectors.toList());
+
+    public static PlateDto convertToPlateDto(Plate plates){
+        return new PlateDto(plates);
+
     }
 }

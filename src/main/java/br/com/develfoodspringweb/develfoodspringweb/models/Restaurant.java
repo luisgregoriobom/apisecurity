@@ -2,7 +2,6 @@ package br.com.develfoodspringweb.develfoodspringweb.models;
 
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "restaurants")
+@Data
 @NoArgsConstructor
 public class Restaurant implements UserDetails {
 
@@ -29,13 +28,15 @@ public class Restaurant implements UserDetails {
     private String email;
     private String address;
     private String phone;
+    private String foodType;
 
-    @OneToMany(mappedBy = "restaurant")
-    @JsonIgnore
+    @OneToMany(mappedBy = "restaurant") @JsonIgnore
     private List<Plate> plate;
+    @OneToMany(mappedBy = "restaurant")
+    private List<Profile> restaurantProfile = new ArrayList<>();
 
 
-    public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone) {
+    public Restaurant(String name, String cnpj, String login, String password, String email, String address, String phone, String foodType, List plate) {
         this.name = name;
         this.cnpj = cnpj;
         this.login = login;
@@ -43,9 +44,11 @@ public class Restaurant implements UserDetails {
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.foodType = foodType;
+        this.plate = plate;
     }
 
-    public Restaurant(RestaurantForm restaurantForm) {
+    public Restaurant(RestaurantForm restaurantForm){
         this.name = restaurantForm.getName();
         this.cnpj = restaurantForm.getCnpj();
         this.login = restaurantForm.getLogin();
@@ -56,14 +59,15 @@ public class Restaurant implements UserDetails {
 
     /**
      * Constructor created just to manually add data into the database with configurar method that belong to InitialConfig class on configuration package
-     *
      * @param name
      * @param phone
      * @author: Thomas B.P.
      */
-    public Restaurant(String name, String phone) {
+    public Restaurant(String name, String cnpj, String phone, String foodType){
         this.name = name;
+        this.cnpj = cnpj;
         this.phone = phone;
+        this.foodType = foodType;
     }
 
     /**
@@ -78,8 +82,6 @@ public class Restaurant implements UserDetails {
      *
      * @author: Luis Gregorio
      */
-    @ManyToMany
-    private List<Profile> restaurantProfile = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -13,10 +13,7 @@ import java.util.Optional;
  */
 public interface PlateRepository extends JpaRepository<Plate, Long>{
 
-    /**
-     *Function to search for a plates by name.
-     * @param name
-     * @return
-     */
-    List<Plate> findByName(String name);
+
+    Optional<Plate> findByName(String name);
+
 }

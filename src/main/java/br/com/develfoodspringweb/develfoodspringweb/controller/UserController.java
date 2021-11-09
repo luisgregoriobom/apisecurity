@@ -6,6 +6,7 @@ import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserFormUpda
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
+import br.com.develfoodspringweb.develfoodspringweb.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,56 +27,64 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Luis Gregorio.
- *
- * Class that performs the methods of listing, registering, detailing, updating and removing from a user.
- */
 @Data
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
+
     private final UserRepository userRepository;
 
+    private final UserService userService;
+
+
     /**
-     * Method to list all database users.
-     * @param userName
+     * Function with GET method to do make a query with the name of the user as parameter.
+     * @param nameUser
      * @return
-     * @author: Luis Gregorio
+     * @author: Thomas B.P.
      */
-        @GetMapping
-        @Transactional
-        public List<UserDto> list(String userName) {
-        if (userName == null) {
-            List<User> users = userRepository.findAll();
-            return UserDto.converter(users);
-        } else {
-            List<User> users = userRepository.findByName(userName);
-            return UserDto.converter(users);
+    @GetMapping
+    public ResponseEntity<UserDto> getUserByName(@RequestParam String nameUser){
+        if(nameUser == null){
+            return null;
         }
+
+        UserDto queryByName = userService.getUserByName(nameUser);
+        if (queryByName == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "User name not found");
+        }
+         return new ResponseEntity<>(queryByName, HttpStatus.OK);
+
     }
 
     /**
-     * Method for registering a new user in the database.
+     * Function with POST method to register new User while the function create the URI route and return the head HTTP location with the URL
      * @param userForm
      * @param uriBuilder
      * @return
-     * @author: Luis Gregorio
+     * @author: Thomas B.P.
      */
-        @PostMapping
-        @Transactional
-        public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm, UriComponentsBuilder uriBuilder){
-            User user = userForm.convertToUser(userRepository);
+    @PostMapping
+    public ResponseEntity<UserDto> register(@RequestBody @Valid UserForm userForm,
+                                            UriComponentsBuilder uriBuilder){
 
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodedPassword);
+        UserDto userToRegister = userService.register(userForm);
+        if (userToRegister == null){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "User not created.");
+        }
+        if (userForm.getPassword() == null){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Error encrypting password.");
+        }
 
-            userRepository.save(user);
-            URI uri = uriBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(new UserDto(user));
+        URI uri = uriBuilder
+                .path("/api/user/{id}")
+                .buildAndExpand(userToRegister.getId())
+                .toUri();
+
+       return ResponseEntity.created(uri).body(userToRegister);
     }
 
     /**

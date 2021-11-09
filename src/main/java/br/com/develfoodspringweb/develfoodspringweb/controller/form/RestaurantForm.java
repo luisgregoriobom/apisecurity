@@ -31,13 +31,27 @@ public class RestaurantForm {
 
     private List<Plate> plates;
 
+    public RestaurantForm() {
+    }
+
+    public RestaurantForm(Restaurant restaurant){
+        this.name = restaurant.getName();
+        this.cnpj = restaurant.getCnpj();
+        this.login = restaurant.getLogin();
+        this.password = restaurant.getPassword();
+        this.email = restaurant.getEmail();
+        this.address = restaurant.getAddress();
+        this.phone = restaurant.getPhone();
+
+    }
+
     /**
      * Function to convert the object Form Class received into a Model Object
-     * @param restaurantRepository
+     * @param restaurantForm
      * @return
      * @author: Thomas B.P.
      */
-    public Restaurant converterToRestaurant(RestaurantRepository restaurantRepository) {
-        return new Restaurant(name, cnpj, login, password, email, address, phone);
+    public Restaurant convertToRestaurant(RestaurantForm restaurantForm) {
+        return new Restaurant(restaurantForm);
     }
 }
