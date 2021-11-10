@@ -44,4 +44,14 @@ public class RestaurantDto {
         return new RestaurantDto(restaurant);
     }
 
+    /**
+     * Function to convert the RestaurantDTO Object for a Restaurant List
+     * @param restaurants
+     * @return
+     * @author: Luis Gregorio
+     */
+    public static List<RestaurantDto> converter(List<Restaurant> restaurants) {
+        return restaurants.stream().map(RestaurantDto::new).collect(Collectors.toList());
+    }
+
 }

@@ -44,14 +44,14 @@ public class PlateForm {
 
     //interface NameRestaurantRepository para buscar o nome do restaurante
     // sem que atrele a busca a sua entidade, e sim somente ao seu nome.
-//    public Plate convert(PlateForm plateForm) {
-//        Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
-//        var newRestaurant = new Restaurant();
-//        if(restaurant.isPresent()) {
-//            newRestaurant = restaurant.get();
-//        }
-//    return new Plate(name, obs, price, category, newRestaurant);
-//    }
+    public Plate convert(PlateForm plateForm) {
+        Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
+        var newRestaurant = new Restaurant();
+        if(restaurant.isPresent()) {
+            newRestaurant = restaurant.get();
+        }
+    return new Plate(name, obs, price, category, newRestaurant);
+    }
 
 // Função pra converter form pra model e puxar já ao ID do restaurant - vai ser refeita!!!
 //    public Plate convert(RestaurantRepository restaurantRepository) {

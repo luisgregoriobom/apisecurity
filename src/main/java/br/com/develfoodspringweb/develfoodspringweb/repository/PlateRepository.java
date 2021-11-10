@@ -1,6 +1,7 @@
 package br.com.develfoodspringweb.develfoodspringweb.repository;
 
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
+import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,5 +16,13 @@ public interface PlateRepository extends JpaRepository<Plate, Long>{
 
 
     Optional<Plate> findByName(String name);
+
+    /**
+     * Function to search for a plate by name in GET Method List.
+     * @param plateName
+     * @return
+     * @author: Luis Gregorio
+     */
+    List<Plate> findByPlateName(String plateName);
 
 }

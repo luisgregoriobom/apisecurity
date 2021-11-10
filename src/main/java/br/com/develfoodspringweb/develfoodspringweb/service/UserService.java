@@ -1,7 +1,14 @@
 package br.com.develfoodspringweb.develfoodspringweb.service;
 
+import br.com.develfoodspringweb.develfoodspringweb.controller.dto.PlateDto;
+import br.com.develfoodspringweb.develfoodspringweb.controller.dto.RestaurantDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateFormUpdate;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantFormUpdate;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserFormUpdate;
+import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
+import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.models.User;
 import br.com.develfoodspringweb.develfoodspringweb.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +60,39 @@ public class UserService {
             return null;
         }
         return new UserDto(user);
+    }
+
+    public UserDto details(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (!user.isPresent()) {
+            return null;
+        }
+        return new UserDto(user.get());
+    }
+
+    public UserDto update(Long id, UserFormUpdate form) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        try{
+            String encodedPassword = passwordEncoder.encode(form.getPassword());
+            form.setPassword(encodedPassword);
+        } catch(Exception e) {
+            return null;
+        }
+
+        Optional<User> opt = userRepository.findById(id);
+        if (opt.isPresent()) {
+            User user = form.update(id, userRepository);
+            return new UserDto(user);
+        }
+        return null;
+    }
+
+    public UserDto remove(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()) {
+            userRepository.deleteById(id);
+            return new UserDto(user.get());
+        }
+        return null;
     }
 }

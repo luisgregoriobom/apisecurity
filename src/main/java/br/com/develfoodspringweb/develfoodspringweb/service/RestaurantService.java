@@ -1,8 +1,12 @@
 package br.com.develfoodspringweb.develfoodspringweb.service;
 
+import br.com.develfoodspringweb.develfoodspringweb.controller.dto.PlateDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.dto.RestaurantDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.FilterForm;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.PlateFormUpdate;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantForm;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantFormUpdate;
+import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
 import br.com.develfoodspringweb.develfoodspringweb.models.Restaurant;
 import br.com.develfoodspringweb.develfoodspringweb.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -87,5 +91,40 @@ public class RestaurantService {
         restaurants.stream().map(restaurant -> restaurantDtoList.add(new RestaurantDto(restaurant))).collect(Collectors.toList());
         return restaurantDtoList;
     }
+
+    public RestaurantDto details(Long id) {
+        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+        if (!restaurant.isPresent()) {
+            return null;
+        }
+        return new RestaurantDto(restaurant.get());
+    }
+
+    public RestaurantDto update(Long id, RestaurantFormUpdate form) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        try{
+            String encodedPassword = passwordEncoder.encode(form.getPassword());
+            form.setPassword(encodedPassword);
+        } catch(Exception e) {
+            return null;
+        }
+
+        Optional<Restaurant> opt = restaurantRepository.findById(id);
+        if (opt.isPresent()) {
+            Restaurant restaurant = form.update(id, restaurantRepository);
+            return new RestaurantDto(restaurant);
+        }
+        return null;
+    }
+
+    public RestaurantDto remove(Long id) {
+        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+        if(restaurant.isPresent()) {
+            restaurantRepository.deleteById(id);
+            return new RestaurantDto(restaurant.get());
+        }
+        return null;
+    }
+
 
 }

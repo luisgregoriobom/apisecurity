@@ -1,6 +1,8 @@
 package br.com.develfoodspringweb.develfoodspringweb.controller;
 
+import br.com.develfoodspringweb.develfoodspringweb.controller.dto.RestaurantDto;
 import br.com.develfoodspringweb.develfoodspringweb.controller.dto.UserDto;
+import br.com.develfoodspringweb.develfoodspringweb.controller.form.RestaurantFormUpdate;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserForm;
 import br.com.develfoodspringweb.develfoodspringweb.controller.form.UserFormUpdate;
 import br.com.develfoodspringweb.develfoodspringweb.models.Plate;
@@ -96,35 +98,31 @@ public class UserController {
         @GetMapping("/{id}")
         @Transactional
         public ResponseEntity<UserDto> details(@PathVariable Long id) {
-            Optional<User> user = userRepository.findById(id);
-        if(user.isPresent()) {
-            return ResponseEntity.ok(new UserDto(user.get()));
+            UserDto userDetail = userService.details(id);
+            if(userDetail == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "User Not Found");
+            }
+            return ResponseEntity.ok(userDetail);
         }
-        return ResponseEntity.notFound().build();
-    }
 
     /**
      * Method to update some information of a user exists in the database.
      * @param id
-     * @param userFormUpdate
+     * @param form
      * @return
      * @author: Luis Gregorio
      */
         @PutMapping("/{id}")
         @Transactional
-        public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormUpdate userFormUpdate) {
-            Optional<User> opt = userRepository.findById(id);
-        if(opt.isPresent()) {
-
-            User user = userFormUpdate.update(id, userRepository);
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String encodedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodedPassword);
-
-            return ResponseEntity.ok(new UserDto(user));
+        public ResponseEntity<UserDto> update(@PathVariable Long id, @RequestBody @Valid UserFormUpdate form){
+            UserDto userUpdate = userService.update(id, form);
+            if(userUpdate == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Restaurant Not Found");
+            }
+            return ResponseEntity.ok(userUpdate);
         }
-        return ResponseEntity.notFound().build();
-    }
 
     /**
      * Method to delete a user from the database.
@@ -134,12 +132,12 @@ public class UserController {
      */
         @DeleteMapping("/{id}")
         @Transactional
-        public ResponseEntity<?> delete(@PathVariable Long id) {
-            Optional<User> opt = userRepository.findById(id);
-        if(opt.isPresent()) {
-            userRepository.deleteById(id);
+        public ResponseEntity<?> remove(@PathVariable Long id){
+            UserDto userRemove = userService.remove(id);
+            if(userRemove == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Restaurant Not Found");
+            }
             return ResponseEntity.ok().build();
         }
-        return ResponseEntity.notFound().build();
-    }
 }
